@@ -27,9 +27,13 @@ public class Rover {
 	}
 
 	public void move() {
-		if(currentHeadingInt == 1 || currentHeadingInt == 3){
-			this.currentCoordinates[0] += 1;
-		} else this.currentCoordinates[1] += 1;
+		if(currentHeading == 1 || currentHeading == 3){
+			if(currentCoordinates[0] >= 0 && currentCoordinates[0] < plateau.getSize()[0]) {
+				this.currentCoordinates[0]++;
+			}
+		} else if(currentCoordinates[1] >= 0 && currentCoordinates[1] < plateau.getSize()[1]) {
+			this.currentCoordinates[1]++;
+		}
 
 	}
 
