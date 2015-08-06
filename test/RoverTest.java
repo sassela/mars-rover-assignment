@@ -2,9 +2,11 @@ import org.junit.Test;
 import static org.junit.Assert.*;
 
 public class RoverTest {
+	Plateau p = new Plateau(new int[] {5, 5});
+
 	@Test
 	public void testInstruct(){
-		Rover r = new Rover(new int[] {0, 0});
+		Rover r = new Rover(p, new int[] {0, 0});
 
 		assertEquals("0 0 N", r.getCurrentPosition());
 
@@ -23,20 +25,20 @@ public class RoverTest {
 
 	@Test
 	public void testTurn(){
-		Rover r = new Rover(new int[] {0, 0});
+		Rover r = new Rover(p, new int[] {0, 0});
 
-		assertEquals("N", r.getCurrentHeadingStr());
+		assertEquals(0, r.getCurrentHeading());
 
 		r.turn("R");
-		assertEquals("E", r.getCurrentHeadingStr());
+		assertEquals(1, r.getCurrentHeading());
 
 		r.turn("L");
-		assertEquals("N", r.getCurrentHeadingStr());
+		assertEquals(0, r.getCurrentHeading());
 	}
 
 	@Test
 	public void testMove(){
-		Rover r = new Rover(new int[] {0, 0});
+		Rover r = new Rover(p, new int[] {0, 0});
 
 		assertArrayEquals(new int[]{0, 0}, r.getCurrentCoordinates());
 

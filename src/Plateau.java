@@ -6,6 +6,10 @@ public class Plateau {
 	 size = new int[2];
 	}
 
+	public Plateau(int[] size) {
+	 this.size = size;
+	}
+
 	public int[] getSize() {
 		return size;
 	}
