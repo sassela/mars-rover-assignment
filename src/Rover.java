@@ -41,10 +41,10 @@ public class Rover {
 		try {
 			switch (direction) {
 				case "L":
-					currentHeadingInt -= 1;
+					currentHeading--;
 					break;
 				case "R":
-					currentHeadingInt += 1;
+					currentHeading++;
 					break;
 			}
 		} catch (InvalidParameterException e) {
