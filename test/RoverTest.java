@@ -24,10 +24,9 @@ public class RoverTest {
 	public void testMove(){
 		Rover r = new Rover(new int[] {0, 0});
 
-		assertEquals(new int[] {0, 0}, r.getCurrentPosition());
+		assertArrayEquals(new int[]{0, 0}, r.getCurrentLocation());
 
 		r.move();
-		assertEquals(new int[] {0, 1}, r.getCurrentPosition());
+		assertArrayEquals(new int[] {0, 1}, r.getCurrentLocation());
 	}
-
 }

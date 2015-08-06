@@ -2,13 +2,21 @@ import java.security.InvalidParameterException;
 
 public class Rover {
 
-	int[] location;
+	int[] currentLocation;
 	int currentHeadingInt;
 	String currentHeadingStr;
 	String[] directions = {"N", "E", "S", "W"};
 
 	public Rover(int[] location) {
+		currentLocation = location;
 		currentHeadingInt = 0;
+	}
+
+	public void move() {
+		if(currentHeadingInt == 1 || currentHeadingInt == 3){
+			this.currentLocation[0] += 1;
+		} else this.currentLocation[1] += 1;
+
 	}
 
 	public void turn(String direction) {
@@ -27,12 +35,12 @@ public class Rover {
 		}
 	}
 
-	public int[] getLocation() {
-		return location;
+	public int[] getCurrentLocation() {
+		return currentLocation;
 	}
 
-	public void setLocation(int[] location) {
-		this.location = location;
+	public void setCurrentLocation(int[] currentLocation) {
+		this.currentLocation = currentLocation;
 	}
 
 	public String getCurrentHeadingStr() {
