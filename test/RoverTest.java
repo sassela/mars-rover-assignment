@@ -22,7 +22,12 @@ public class RoverTest {
 
 	@Test
 	public void testMove(){
-		fail();
+		Rover r = new Rover(new int[] {0, 0});
+
+		assertEquals(new int[] {0, 0}, r.getCurrentPosition());
+
+		r.move();
+		assertEquals(new int[] {0, 1}, r.getCurrentPosition());
 	}
 
 }
