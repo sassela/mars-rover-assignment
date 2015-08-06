@@ -34,6 +34,10 @@ public class Rover {
 		}
 	}
 
+	public String parseCoordinates(int[] array) {
+		return array[0] + " " + array[1];
+	}
+
 	public int[] getCurrentCoordinates() {
 		return currentCoordinates;
 	}
@@ -42,8 +46,17 @@ public class Rover {
 		this.currentCoordinates = currentCoordinates;
 	}
 
-	public String getCurrentHeadingStr() {
-		currentHeadingStr = directions[currentHeadingInt];
-		return currentHeadingStr;
+	public int getCurrentHeading() {
+		return currentHeading;
+	}
+
+	public String parseHeading(int currentHeading) {
+		String[] directions = {"N", "E", "S", "W"};
+		return directions[currentHeading];
+	}
+
+	public String getCurrentPosition() {
+		currentPosition = parseCoordinates(currentCoordinates) + " " + parseHeading(currentHeading);
+		return currentPosition;
 	}
 }
