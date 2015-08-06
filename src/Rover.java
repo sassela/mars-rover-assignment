@@ -2,20 +2,20 @@ import java.security.InvalidParameterException;
 
 public class Rover {
 
-	int[] currentLocation;
+	int[] currentCoordinates;
 	int currentHeadingInt;
 	String currentHeadingStr;
 	String[] directions = {"N", "E", "S", "W"};
 
 	public Rover(int[] location) {
-		currentLocation = location;
+		currentCoordinates = location;
 		currentHeadingInt = 0;
 	}
 
 	public void move() {
 		if(currentHeadingInt == 1 || currentHeadingInt == 3){
-			this.currentLocation[0] += 1;
-		} else this.currentLocation[1] += 1;
+			this.currentCoordinates[0] += 1;
+		} else this.currentCoordinates[1] += 1;
 
 	}
 
@@ -30,17 +30,16 @@ public class Rover {
 					break;
 			}
 		} catch (InvalidParameterException e) {
-			System.err.println("Caught Exception: "
-					+  e.getMessage());
+			System.err.println("Caught Exception: " +  e.getMessage());
 		}
 	}
 
-	public int[] getCurrentLocation() {
-		return currentLocation;
+	public int[] getCurrentCoordinates() {
+		return currentCoordinates;
 	}
 
-	public void setCurrentLocation(int[] currentLocation) {
-		this.currentLocation = currentLocation;
+	public void setCurrentCoordinates(int[] currentCoordinates) {
+		this.currentCoordinates = currentCoordinates;
 	}
 
 	public String getCurrentHeadingStr() {
