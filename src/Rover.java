@@ -70,7 +70,8 @@ public class Rover {
 
 	public String parseHeading(int currentHeading) {
 		String[] directions = {"N", "E", "S", "W"};
-		return directions[currentHeading];
+		int directionIndex = (currentHeading < 0 ? (currentHeading % directions.length) + 4 : currentHeading % directions.length);
+		return directions[directionIndex];
 	}
 
 	public String getCurrentPosition() {
