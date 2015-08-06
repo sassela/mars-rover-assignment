@@ -11,16 +11,13 @@ public class RoverTest {
 	public void testTurn(){
 		Rover r = new Rover(new int[] {0, 0});
 
-		assertEquals(r.getHeading(), "N");
+		assertEquals("N", r.getCurrentHeadingStr());
 
 		r.turn("R");
-		assertEquals(r.getHeading(), "E");
+		assertEquals("E", r.getCurrentHeadingStr());
 
-		r.turn("LL");
-		assertEquals(r.getHeading(), "W");
-
-		r.turn("RLL");
-		assertEquals(r.getHeading(), "S");
+		r.turn("L");
+		assertEquals("N", r.getCurrentHeadingStr());
 	}
 
 	@Test
