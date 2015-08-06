@@ -1,15 +1,29 @@
 import java.security.InvalidParameterException;
 
 public class Rover {
-
+	Plateau plateau;
 	int[] currentCoordinates;
-	int currentHeadingInt;
-	String currentHeadingStr;
-	String[] directions = {"N", "E", "S", "W"};
+	int currentHeading;
+	String currentPosition;
 
-	public Rover(int[] location) {
+	public Rover(Plateau plateau, int[] location) {
+		this.plateau = plateau;
 		currentCoordinates = location;
-		currentHeadingInt = 0;
+		currentHeading = 0;
+	}
+
+	public void instruct(String instructionsInput) {
+		String[] instructions = instructionsInput.split(" ");
+		for (String instruction : instructions) {
+			switch (instruction) {
+				case "M":
+					this.move();
+					break;
+				default:
+					this.turn(instruction);
+					break;
+			}
+		}
 	}
 
 	public void move() {
