@@ -4,10 +4,12 @@ public class Plateau {
 
 	int[] size;
 	ArrayList<Rover> rovers;
+	String[] directions;
 
 	public Plateau(int[] size) {
 		this.size = size;
 		rovers = new ArrayList<Rover>();
+		directions = new String[] {"N", "E", "S", "W"};
 	}
 
 	public int[] getSize() {
@@ -22,5 +24,8 @@ public class Plateau {
 			}
 		}
 		this.size = size;
+	}
+	public String[] getDirections() {
+		return directions;
 	}
 }
