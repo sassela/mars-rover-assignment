@@ -5,11 +5,6 @@ public class Plateau {
 	int[] size;
 	ArrayList<Rover> rovers;
 
-	public Plateau() {
-		size = new int[2];
-		rovers = new ArrayList<Rover>();
-	}
-
 	public Plateau(int[] size) {
 		this.size = size;
 		rovers = new ArrayList<Rover>();

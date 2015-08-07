@@ -5,10 +5,8 @@ public class PlateauTest {
 
 	@Test
 	public void testSetSize(){
-		Plateau p = new Plateau();
 		int[] singleCell = {0, 0};
-
-		assertArrayEquals(singleCell, p.getSize());
+		Plateau p = new Plateau(singleCell);
 
 		p.setSize(new int[] {5, 5});
 		assertArrayEquals(new int[] {5, 5}, p.getSize());
