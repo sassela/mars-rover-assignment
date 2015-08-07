@@ -6,10 +6,10 @@ public class Rover {
 	int currentHeading;
 	String currentPosition;
 
-	public Rover(Plateau plateau, int[] location) {
+	public Rover(Plateau plateau, int[] currentCoordinates, int currentHeading) {
 		this.plateau = plateau;
-		currentCoordinates = location;
-		currentHeading = 0;
+		this.currentCoordinates = currentCoordinates;
+		this.currentHeading = currentHeading;
 	}
 
 	public void instruct(String instructionsInput) {
