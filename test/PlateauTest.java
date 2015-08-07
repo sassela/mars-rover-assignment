@@ -22,14 +22,22 @@ public class PlateauTest {
 	}
 
 	@Test
-	public void deployRover() {
+	public void testParsePosition() {
+		Plateau p = new Plateau(new int[] {5, 5});
+		String position = ("0 0 N");
+
+		assertEquals(new Rover(p, new int[] {0, 0}, 0), p.parsePosition(position));
+	}
+
+	@Test
+	public void testDeployRover() {
 		Plateau p = new Plateau(new int[] {5, 5});
 
-		assertEquals(false, isRoverAt("0 0 N"));
+		assertEquals(false, p.isRoverAt("0 0 N"));
 
-		deployRover("0 0 N");
-		assertEquals(true, isRoverAt("0 0 N"));
-		assertEquals(false, isRoverAt("0 0 E"));
+		p.deployRover("0 0 N");
+		assertEquals(true, p.isRoverAt("0 0 N"));
+		assertEquals(false, p.isRoverAt("0 0 E"));
 
 	}
 }
