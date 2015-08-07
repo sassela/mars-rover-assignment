@@ -20,16 +20,4 @@ public class PlateauTest {
 		p.setSize(singleCell);
 		assertArrayEquals(singleCell, p.getSize());
 	}
-
-	@Test
-	public void testDeployRover() {
-		Plateau p = new Plateau(new int[] {5, 5});
-
-		assertEquals(false, p.isRoverAt("0 0 N"));
-
-		p.deployRover("0 0 N");
-		assertEquals(true, p.isRoverAt("0 0 N"));
-		assertEquals(false, p.isRoverAt("0 0 E"));
-
-	}
 }
