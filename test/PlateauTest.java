@@ -28,4 +28,15 @@ public class PlateauTest {
 
 		assertEquals(true, p.isRoverAt("3 3 N"));
 	}
+
+	@Test
+	public void testGetRoverAt() {
+		Plateau p = new Plateau(new int[] {5,5});
+		Rover r = new Rover(p, new int[] {5,5}, 1);
+
+		assertEquals(null, p.getRoverAt("5 5 E"));
+
+		p.addRover(r);
+		assertEquals(r, p.getRoverAt("5 5 E"));
+	}
 }
