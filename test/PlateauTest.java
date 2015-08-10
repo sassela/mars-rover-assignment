@@ -22,14 +22,6 @@ public class PlateauTest {
 	}
 
 	@Test
-	public void testisRoverAt() {
-		Plateau p = new Plateau(new int[] {5,5});
-		p.addRover(new Rover(p, new int[] {3,3}, 0));
-
-		assertEquals(true, p.isRoverAt("3 3 N"));
-	}
-
-	@Test
 	public void testGetRoverAt() {
 		Plateau p = new Plateau(new int[] {5,5});
 		Rover r = new Rover(p, new int[] {5,5}, 1);

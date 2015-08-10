@@ -28,13 +28,13 @@ public class Plateau {
 		rovers.add(rover);
 	}
 
-	public boolean isRoverAt(String position) {
-		boolean roverIsAt = false;
+	public Rover getRoverAt(String position) {
+		Rover roverAtPosition = null;
 		for (Rover rover : rovers) {
 			if (rover.getCurrentPosition().equals(position)) {
-				roverIsAt = true;
+				roverAtPosition = rover;
 			}
 		}
-		return roverIsAt;
+		return roverAtPosition;
 	}
 }
