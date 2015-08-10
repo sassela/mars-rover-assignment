@@ -8,11 +8,11 @@ public class MissionControlTest {
 	public void testDeployRover() {
 		Plateau p = new Plateau(new int[] {5, 5});
 
-		assertEquals(false, missionControl.isRoverAt(p, "0 0 N"));
+		assertEquals(false, p.isRoverAt("0 0 N"));
 
 		missionControl.deployRover(p, "0 0 N");
-		assertEquals(true, missionControl.isRoverAt(p, "0 0 N"));
-		assertEquals(false, missionControl.isRoverAt(p, "0 0 E"));
+		assertEquals(true, p.isRoverAt("0 0 N"));
+		assertEquals(false, p.isRoverAt("0 0 E"));
 
 	}
 
