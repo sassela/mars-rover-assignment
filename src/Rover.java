@@ -5,11 +5,13 @@ public class Rover {
 	int[] currentCoordinates;
 	int currentHeading;
 	String currentPosition;
+	String[] headingsOptions;
 
 	public Rover(Plateau plateau, int[] currentCoordinates, int currentHeading) {
 		this.plateau = plateau;
 		this.currentCoordinates = currentCoordinates;
 		this.currentHeading = currentHeading;
+		headingsOptions = new String[] {"N", "E", "S", "W"};
 	}
 
 	public void instruct(String instructionsInput) {
@@ -69,9 +71,8 @@ public class Rover {
 	}
 
 	public String parseHeading(int currentHeading) {
-		String[] directions = plateau.getDirections();
-		int directionIndex = (currentHeading < 0 ? (currentHeading % directions.length) + 4 : currentHeading % directions.length);
-		return directions[directionIndex];
+		int headingIndex = (currentHeading < 0 ? (currentHeading % headingsOptions.length) + 4 : currentHeading % headingsOptions.length);
+		return headingsOptions[headingIndex];
 	}
 
 	public String getCurrentPosition() {
