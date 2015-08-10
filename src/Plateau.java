@@ -3,13 +3,11 @@ import java.util.ArrayList;
 public class Plateau {
 
 	int[] size;
-	ArrayList<String> roverPositions;
-	String[] directions;
+	ArrayList<Rover> rovers;
 
 	public Plateau(int[] size) {
 		this.size = size;
-		roverPositions = new ArrayList<String>();
-		directions = new String[] {"N", "E", "S", "W"};
+		rovers = new ArrayList<Rover>();
 	}
 
 	public int[] getSize() {
@@ -26,27 +24,17 @@ public class Plateau {
 		this.size = size;
 	}
 
-	public void deployRover(String position) {
-		roverPositions.add(position);
+	public void addRover(Rover rover) {
+		rovers.add(rover);
 	}
 
 	public boolean isRoverAt(String position) {
-		for (int i = 0; i < roverPositions.size(); i++) {
-			if (roverPositions.get(i).equals(position)) {
-				return true;
+		boolean roverIsAt = false;
+		for (Rover rover : rovers) {
+			if (rover.getCurrentPosition().equals(position)) {
+				roverIsAt = true;
 			}
 		}
-		return false;
-	}
-
-	public Rover parsePosition(String position) {
-		String[] positionArray = position.split(" ");
-		int[] coordinates = {Integer.parseInt(positionArray[0], Integer.parseInt(positionArray[1]))};
-		int heading = Integer.parseInt(positionArray[2]);
-		return(new Rover(this, coordinates, heading));
-	}
-
-	public String[] getDirections() {
-		return directions;
+		return roverIsAt;
 	}
 }

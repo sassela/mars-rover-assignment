@@ -20,4 +20,12 @@ public class PlateauTest {
 		p.setSize(singleCell);
 		assertArrayEquals(singleCell, p.getSize());
 	}
+
+	@Test
+	public void testisRoverAt() {
+		Plateau p = new Plateau(new int[] {5,5});
+		p.addRover(new Rover(p, new int[] {3,3}, 0));
+
+		assertEquals(true, p.isRoverAt("3 3 N"));
+	}
 }
