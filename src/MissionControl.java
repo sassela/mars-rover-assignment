@@ -4,8 +4,8 @@ public class MissionControl {
 	String[] headingsOptions = new String[] {"N", "E", "S", "W"};
 
 	public void deployRover(Plateau plateau, String position){
-		Rover rover = createRoverAtPosition(position);
-		if(!plateau.isRoverAt(position)) {
+		if(plateau.getRoverAt(position) == null) {
+			Rover rover = createRoverAtPosition(position);
 			plateau.addRover(rover);
 		}
 	}
