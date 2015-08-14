@@ -10,16 +10,16 @@ public class RoverTest {
 
 		assertEquals("0 0 N", r.getCurrentPosition());
 
-		r.instruct("M M M");
+		r.instruct("MMM");
 		assertEquals("0 3 N", r.getCurrentPosition());
 
-		r.instruct("R L L");
+		r.instruct("RLL");
 		assertEquals("0 3 W", r.getCurrentPosition());
 
-		r.instruct("R R L R M");
+		r.instruct("RRLRM");
 		assertEquals("1 3 E", r.getCurrentPosition());
 
-		r.instruct("L M M M R M R");
+		r.instruct("LMMMRMR");
 		assertEquals("2 5 S", r.getCurrentPosition());
 	}
 
@@ -29,10 +29,10 @@ public class RoverTest {
 
 		assertEquals(0, r.getCurrentHeading());
 
-		r.turn("R");
+		r.turn('R');
 		assertEquals(1, r.getCurrentHeading());
 
-		r.turn("L");
+		r.turn('L');
 		assertEquals(0, r.getCurrentHeading());
 	}
 

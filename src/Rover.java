@@ -11,14 +11,15 @@ public class Rover {
 		this.plateau = plateau;
 		this.currentCoordinates = currentCoordinates;
 		this.currentHeading = currentHeading;
+		//TODO enum type
 		headingsOptions = new String[] {"N", "E", "S", "W"};
 	}
 
 	public void instruct(String instructionsInput) {
-		String[] instructions = instructionsInput.split(" ");
-		for (String instruction : instructions) {
+		char[] instructions = instructionsInput.toCharArray();
+		for (char instruction : instructions) {
 			switch (instruction) {
-				case "M":
+				case 'M':
 					this.move();
 					break;
 				default:
@@ -29,23 +30,31 @@ public class Rover {
 	}
 
 	public void move() {
-		if(currentHeading == 1 || currentHeading == 3){
-			if(currentCoordinates[0] >= 0 && currentCoordinates[0] < plateau.getSize()[0]) {
-				this.currentCoordinates[0]++;
+		if (isWithinPlateauLimits()) {
+			switch (currentHeading) {
+				case 0:
+					this.currentCoordinates[1]++;
+					break;
+				case 1:
+					this.currentCoordinates[0]++;
+					break;
+				case 2:
+					this.currentCoordinates[1]--;
+					break;
+				case 3:
+					this.currentCoordinates[0]++;
+					break;
 			}
-		} else if(currentCoordinates[1] >= 0 && currentCoordinates[1] < plateau.getSize()[1]) {
-			this.currentCoordinates[1]++;
 		}
-
 	}
 
-	public void turn(String direction) {
+	public void turn(char direction) {
 		try {
 			switch (direction) {
-				case "L":
+				case 'L':
 					currentHeading--;
 					break;
-				case "R":
+				case 'R':
 					currentHeading++;
 					break;
 			}
@@ -78,5 +87,32 @@ public class Rover {
 	public String getCurrentPosition() {
 		currentPosition = parseCoordinates(currentCoordinates) + " " + parseHeading(currentHeading);
 		return currentPosition;
+	}
+
+	private boolean isWithinPlateauLimits() {
+		boolean withinLimits = false;
+		switch (currentHeading) {
+			case 0:
+				if (currentCoordinates[1] < plateau.getSize()[1]) {
+					withinLimits = true;
+				}
+				break;
+			case 1:
+				if (currentCoordinates[0] < plateau.getSize()[0]) {
+					withinLimits = true;
+				}
+				break;
+			case 2:
+				if (currentCoordinates[1] >= 0) {
+					withinLimits = true;
+				}
+				break;
+			case 3:
+				if (currentCoordinates[0] >= 0) {
+					withinLimits = true;
+				}
+				break;
+		}
+		return withinLimits;
 	}
 }
