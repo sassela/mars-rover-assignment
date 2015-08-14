@@ -1,4 +1,3 @@
-import java.util.Arrays;
 import java.util.Scanner;
 
 public class MissionControl {
@@ -10,45 +9,56 @@ public class MissionControl {
 
 
 	public static void main (String[] args){
-		requestPlateauSize();
+		printWelcomeMessage();
+		setPlateauSize(requestPlateauSizeInput());
 		do { runMission(); } while(!missionTerminated());
 		in.close();
+		printClosingMessage();
 	}
 
-	public static void requestPlateauSize(){
-		System.out.print("Welcome to the Mars Rover Mission Control. Enter the desired plateau size, in the format \"x y\". ");
-		System.out.println("Enter \"X\" at any point to terminate the mission)\"");
-		String plateauSizeStr = in.nextLine();
-		String[] plateauSize = plateauSizeStr.split(" ");
-		plateau = new Plateau(new int[] {Integer.parseInt(plateauSize[0]), Integer.parseInt(plateauSize[1])});
-		System.out.println(Arrays.toString(plateau.getSize()));
-		System.out.println("Plateau size had been set as "+plateau.getSize()[0]+" "+plateau.getSize()[1]+".");
+	private static void printWelcomeMessage() {
+		System.out.println("Welcome to the Mars Rover Mission Control. Enter \"X\" at any point to terminate the mission\"");
 	}
 
-	public static void runMission() {
+	private static void printClosingMessage() {
+		System.out.println("Mission Terminated");
+	}
+
+	private static String[] requestPlateauSizeInput(){
+		System.out.println("Enter the desired plateau size, in the format \"x y\". ");
+		return in.nextLine().split(" ");
+	}
+
+	private static void setPlateauSize(String[] sizeInput) {
+		int width = Integer.parseInt(sizeInput[0]);
+		int height = Integer.parseInt(sizeInput[1]);
+		plateau = new Plateau(new int[] {width, height});
+		System.out.println("Plateau size had been set as "+plateau.getSize()[0]+" by "+plateau.getSize()[1]+".");
+	}
+
+	private static void runMission() {
 		System.out.println("Enter the rover's position eg. \"1 2 N\"");
-		String positionString = in.nextLine();
+		String positionInput = in.nextLine();
 		System.out.println("Enter the rover's instructions eg. \"LMLMLMLMM\"");
-		String instructionsString = in.nextLine();
-		System.out.println(positionString+" "+instructionsString);
-		deployRover(plateau, positionString);
-		Rover r = plateau.getRoverAt(positionString);
-		r.instruct(instructionsString);
-		System.out.println("Rover moved from: " + positionString + " to " + r.getCurrentPosition());
+		String instructionInput = in.nextLine();
+		// deploy a new rover at the given position if none exists there already
+		Rover existingRover = plateau.getRoverAt(positionInput);
+		Rover rover = existingRover == null ? deployRover(plateau, positionInput) : existingRover;
+		rover.instruct(instructionInput);
+		System.out.println("Rover moved from: " + positionInput + " to " + rover.getCurrentPosition());
 	}
 
-	public static boolean missionTerminated() {
+	private static boolean missionTerminated() {
 		return in.nextLine().equals("X");
 	}
 
-	public static void deployRover(Plateau plateau, String position){
-		if(plateau.getRoverAt(position) == null) {
-			Rover rover = createRoverAtPosition(position);
-			plateau.addRover(rover);
-		}
+	static Rover deployRover(Plateau plateau, String position){
+		Rover rover = createRoverAtPosition(position);
+		plateau.addRover(rover);
+		return rover;
 	}
 
-	public static Rover createRoverAtPosition(String position) {
+	private static Rover createRoverAtPosition(String position) {
 		// TODO create Position class
 		String[] positionArray = position.split(" ");
 		int[] coordinates = new int[]{Integer.parseInt(positionArray[0]),Integer.parseInt(positionArray[1])};
@@ -57,7 +67,7 @@ public class MissionControl {
 	}
 
 	//todo delete or rename. Add exception
-	public static int parseHeading(String currentHeading) {
+	private static int parseHeading(String currentHeading) {
 		int headingInt = 0;
 		for(int i = 0; i < headingsOptions.length; i++){
 			if (headingsOptions[i].equals(currentHeading)) headingInt = i;
