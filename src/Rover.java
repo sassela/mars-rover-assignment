@@ -31,18 +31,19 @@ public class Rover {
 
 	public void move() {
 		if (isWithinPlateauLimits()) {
-			switch (currentHeading) {
-				case 0:
+			String heading = parseHeading(currentHeading);
+			switch (heading) {
+				case "N":
 					this.currentCoordinates[1]++;
 					break;
-				case 1:
+				case "E":
 					this.currentCoordinates[0]++;
 					break;
-				case 2:
+				case "S":
 					this.currentCoordinates[1]--;
 					break;
-				case 3:
-					this.currentCoordinates[0]++;
+				case "W":
+					this.currentCoordinates[0]--;
 					break;
 			}
 		}
@@ -80,7 +81,7 @@ public class Rover {
 	}
 
 	public String parseHeading(int currentHeading) {
-		int headingIndex = (currentHeading < 0 ? (currentHeading % headingsOptions.length) + 4 : currentHeading % headingsOptions.length);
+		int headingIndex = (currentHeading % headingsOptions.length < 0 ? ((currentHeading % headingsOptions.length) + 4) : currentHeading % headingsOptions.length);
 		return headingsOptions[headingIndex];
 	}
 
@@ -91,24 +92,25 @@ public class Rover {
 
 	private boolean isWithinPlateauLimits() {
 		boolean withinLimits = false;
-		switch (currentHeading) {
-			case 0:
-				if (currentCoordinates[1] < plateau.getSize()[1]) {
+		String heading = parseHeading(currentHeading);
+		switch (heading) {
+			case "N":
+				if (currentCoordinates[1] < this.plateau.getSize()[1]) {
 					withinLimits = true;
 				}
 				break;
-			case 1:
-				if (currentCoordinates[0] < plateau.getSize()[0]) {
+			case "E":
+				if (currentCoordinates[0] < this.plateau.getSize()[0]) {
 					withinLimits = true;
 				}
 				break;
-			case 2:
-				if (currentCoordinates[1] >= 0) {
+			case "S":
+				if (currentCoordinates[1] > 0) {
 					withinLimits = true;
 				}
 				break;
-			case 3:
-				if (currentCoordinates[0] >= 0) {
+			case "W":
+				if (currentCoordinates[0] > 0) {
 					withinLimits = true;
 				}
 				break;
