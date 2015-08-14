@@ -21,6 +21,9 @@ public class RoverTest {
 
 		r.instruct("LMMMRMR");
 		assertEquals("2 5 S", r.getCurrentPosition());
+
+		r.instruct("MMMMMMMMM");
+		assertEquals("2 0 S", r.getCurrentPosition());
 	}
 
 	@Test
