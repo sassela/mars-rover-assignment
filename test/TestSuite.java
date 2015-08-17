@@ -3,7 +3,7 @@ import org.junit.runners.Suite;
 
 @RunWith(Suite.class)
 @Suite.SuiteClasses({
-		MissionControlTest.class, PlateauTest.class, RoverTest.class, HeadingTest.class
+		CoordinatesTest.class, HeadingTest.class, MissionControlTest.class, PlateauTest.class, PositionTest.class, RoverTest.class
 })
 
 public class TestSuite {

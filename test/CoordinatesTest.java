@@ -1,3 +1,6 @@
+import org.junit.Test;
+import static org.junit.Assert.assertEquals;
+
 public class CoordinatesTest {
 	Coordinates c = new Coordinates(0, 0);
 
