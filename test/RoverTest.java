@@ -3,11 +3,11 @@ import static org.junit.Assert.assertEquals;
 
 public class RoverTest {
 	Plateau p = new Plateau(new int[] {5, 5});
-	Coordinates bottomLeft = new Coordinates(0, 0);
+	Position bottomLeft = new Position(new Coordinates(0, 0), Heading.N);
 
 	@Test
 	public void testInstruct(){
-		Rover r = new Rover(p, bottomLeft, Heading.N);
+		Rover r = new Rover(p, bottomLeft);
 
 		assertEquals("0 0 N", r.getCurrentPosition());
 
@@ -29,7 +29,7 @@ public class RoverTest {
 
 	@Test
 	public void testTurn(){
-		Rover r = new Rover(p, bottomLeft, Heading.N);
+		Rover r = new Rover(p, bottomLeft);
 
 		r.turn('R');
 		assertEquals(Heading.E, r.getCurrentHeading());
@@ -40,7 +40,7 @@ public class RoverTest {
 
 	@Test
 	public void testMove(){
-		Rover r = new Rover(p, bottomLeft, Heading.N);
+		Rover r = new Rover(p, bottomLeft);
 
 		r.move();
 		assertEquals(new Coordinates(0, 1).toString(), r.getCurrentCoordinates().toString());

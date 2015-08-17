@@ -23,12 +23,13 @@ public class PlateauTest {
 
 	@Test
 	public void testGetRoverAt() {
-		Plateau p = new Plateau(new int[] {5,5});
-		Rover r = new Rover(p, new Coordinates(5, 5), Heading.E);
+		Plateau plateau = new Plateau(new int[] {5,5});
+		Position position = new Position(new Coordinates(5, 5), Heading.E);
+		Rover r = new Rover(plateau, position);
 
-		assertEquals(null, p.getRoverAt("5 5 E"));
+		assertEquals(null, plateau.getRoverAt("5 5 E"));
 
-		p.addRover(r);
-		assertEquals(r, p.getRoverAt("5 5 E"));
+		plateau.addRover(r);
+		assertEquals(r, plateau.getRoverAt("5 5 E"));
 	}
 }

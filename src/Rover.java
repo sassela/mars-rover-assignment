@@ -4,12 +4,13 @@ public class Rover {
 	Plateau plateau;
 	Coordinates currentCoordinates;
 	Heading currentHeading;
-	String currentPosition;
+	Position currentPosition;
 
-	public Rover(Plateau plateau, Coordinates currentCoordinates, Heading currentHeading) {
+	public Rover(Plateau plateau, Position currentPosition) {
 		this.plateau = plateau;
-		this.currentCoordinates = currentCoordinates;
-		this.currentHeading = currentHeading;
+		this.currentCoordinates = currentPosition.getCoordinates();
+		this.currentHeading = currentPosition.getHeading();
+		this.currentPosition = currentPosition;
 	}
 
 	// TODO use Command pattern
@@ -43,6 +44,8 @@ public class Rover {
 					this.currentCoordinates.decrementX();
 					break;
 			}
+			//TODO tidy me.
+			updatePosition();
 		}
 	}
 
@@ -58,6 +61,8 @@ public class Rover {
 					break;
 			}
 			this.currentHeading = Heading.values()[Heading.normalise(heading)];
+			//TODO tidy me.
+			updatePosition();
 
 		} catch (InvalidParameterException e) {
 			System.err.println("Caught Exception: " +  e.getMessage());
@@ -73,8 +78,11 @@ public class Rover {
 	}
 
 	public String getCurrentPosition() {
-		currentPosition = currentCoordinates.toString() + " " + currentHeading.toString();
-		return currentPosition;
+		return currentPosition.toString();
+	}
+
+	public void updatePosition() {
+		this.currentPosition = new Position(currentCoordinates, currentHeading);
 	}
 
 	private boolean isWithinPlateauLimits() {

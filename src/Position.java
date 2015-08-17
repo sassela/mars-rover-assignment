@@ -25,6 +25,13 @@ public class Position {
 		// TODO catch exception.
 		Heading h = Heading.parseHeading(positionArray[2]);
 		return new Position(c, h);
+	}
 
+	public Coordinates getCoordinates() {
+		return coordinates;
+	}
+
+	public Heading getHeading() {
+		return heading;
 	}
 }
