@@ -12,9 +12,9 @@ public enum Heading {
 		return prenormalised % headingSize < 0 ? ((prenormalised % headingSize) + headingSize) : prenormalised % headingSize;
 	}
 
-	static Heading parseHeading(String position) {
+	static Heading parseHeading(String str) {
 		// TODO catch exception.
-		return Heading.valueOf(position.split(" ")[2]);
+		return Heading.valueOf(str);
 	}
 
 	public int getValue() {

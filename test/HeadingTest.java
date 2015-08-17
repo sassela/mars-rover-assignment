@@ -12,6 +12,6 @@ public class HeadingTest {
 
 	@Test
 	public void testParseHeading() {
-		assertEquals(Heading.E, Heading.parseHeading("0 0 E"));
+		assertEquals(Heading.E, Heading.parseHeading("E"));
 	}
 }
