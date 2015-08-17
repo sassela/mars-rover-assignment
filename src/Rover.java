@@ -3,16 +3,13 @@ import java.security.InvalidParameterException;
 public class Rover {
 	Plateau plateau;
 	int[] currentCoordinates;
-	int currentHeading;
+	Heading currentHeading;
 	String currentPosition;
-	String[] headingsOptions;
 
-	public Rover(Plateau plateau, int[] currentCoordinates, int currentHeading) {
+	public Rover(Plateau plateau, int[] currentCoordinates, Heading currentHeading) {
 		this.plateau = plateau;
 		this.currentCoordinates = currentCoordinates;
 		this.currentHeading = currentHeading;
-		//TODO enum type
-		headingsOptions = new String[] {"N", "E", "S", "W"};
 	}
 
 	public void instruct(String instructionsInput) {
@@ -31,18 +28,17 @@ public class Rover {
 
 	public void move() {
 		if (isWithinPlateauLimits()) {
-			String heading = parseHeading(currentHeading);
-			switch (heading) {
-				case "N":
+			switch (currentHeading) {
+				case N:
 					this.currentCoordinates[1]++;
 					break;
-				case "E":
+				case E:
 					this.currentCoordinates[0]++;
 					break;
-				case "S":
+				case S:
 					this.currentCoordinates[1]--;
 					break;
-				case "W":
+				case W:
 					this.currentCoordinates[0]--;
 					break;
 			}
@@ -50,15 +46,18 @@ public class Rover {
 	}
 
 	public void turn(char direction) {
+		int heading = this.currentHeading.getValue();
 		try {
 			switch (direction) {
 				case 'L':
-					currentHeading--;
+					heading--;
 					break;
 				case 'R':
-					currentHeading++;
+					heading++;
 					break;
 			}
+			this.currentHeading = Heading.values()[Heading.normalise(heading)];
+
 		} catch (InvalidParameterException e) {
 			System.err.println("Caught Exception: " +  e.getMessage());
 		}
@@ -76,40 +75,34 @@ public class Rover {
 		this.currentCoordinates = currentCoordinates;
 	}
 
-	public int getCurrentHeading() {
+	public Heading getCurrentHeading() {
 		return currentHeading;
 	}
 
-	public String parseHeading(int currentHeading) {
-		int headingIndex = (currentHeading % headingsOptions.length < 0 ? ((currentHeading % headingsOptions.length) + 4) : currentHeading % headingsOptions.length);
-		return headingsOptions[headingIndex];
-	}
-
 	public String getCurrentPosition() {
-		currentPosition = parseCoordinates(currentCoordinates) + " " + parseHeading(currentHeading);
+		currentPosition = parseCoordinates(currentCoordinates) + " " + currentHeading.toString();
 		return currentPosition;
 	}
 
 	private boolean isWithinPlateauLimits() {
 		boolean withinLimits = false;
-		String heading = parseHeading(currentHeading);
-		switch (heading) {
-			case "N":
+		switch (currentHeading) {
+			case N:
 				if (currentCoordinates[1] < this.plateau.getSize()[1]) {
 					withinLimits = true;
 				}
 				break;
-			case "E":
+			case E:
 				if (currentCoordinates[0] < this.plateau.getSize()[0]) {
 					withinLimits = true;
 				}
 				break;
-			case "S":
+			case S:
 				if (currentCoordinates[1] > 0) {
 					withinLimits = true;
 				}
 				break;
-			case "W":
+			case W:
 				if (currentCoordinates[0] > 0) {
 					withinLimits = true;
 				}

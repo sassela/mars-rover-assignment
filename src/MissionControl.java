@@ -3,8 +3,6 @@ import java.util.Scanner;
 public class MissionControl {
 
 	static Plateau plateau;
-	//TODO enum type
-	static String[] headingsOptions = new String[] {"N", "E", "S", "W"};
 	static Scanner in = new Scanner(System.in);
 
 
@@ -59,20 +57,10 @@ public class MissionControl {
 	}
 
 	private static Rover createRoverAtPosition(String position) {
-		// TODO create Position class
+		// TODO create Position class. catch exception. split into position parsing method
 		String[] positionArray = position.split(" ");
 		int[] coordinates = new int[]{Integer.parseInt(positionArray[0]),Integer.parseInt(positionArray[1])};
-		int heading = parseHeading(positionArray[2]);
+		Heading heading = Heading.valueOf(positionArray[2]);
 		return new Rover(plateau, coordinates, heading);
 	}
-
-	//todo delete or rename. Add exception
-	private static int parseHeading(String currentHeading) {
-		int headingInt = 0;
-		for(int i = 0; i < headingsOptions.length; i++){
-			if (headingsOptions[i].equals(currentHeading)) headingInt = i;
-		}
-		return headingInt;
-	}
-
 }

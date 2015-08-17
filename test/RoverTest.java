@@ -6,7 +6,7 @@ public class RoverTest {
 
 	@Test
 	public void testInstruct(){
-		Rover r = new Rover(p, new int[] {0, 0}, 0);
+		Rover r = new Rover(p, new int[] {0, 0}, Heading.N);
 
 		assertEquals("0 0 N", r.getCurrentPosition());
 
@@ -28,20 +28,18 @@ public class RoverTest {
 
 	@Test
 	public void testTurn(){
-		Rover r = new Rover(p, new int[] {0, 0}, 0);
-
-		assertEquals(0, r.getCurrentHeading());
+		Rover r = new Rover(p, new int[] {0, 0}, Heading.N);
 
 		r.turn('R');
-		assertEquals(1, r.getCurrentHeading());
+		assertEquals(Heading.E, r.getCurrentHeading());
 
 		r.turn('L');
-		assertEquals(0, r.getCurrentHeading());
+		assertEquals(Heading.N, r.getCurrentHeading());
 	}
 
 	@Test
 	public void testMove(){
-		Rover r = new Rover(p, new int[] {0, 0}, 0);
+		Rover r = new Rover(p, new int[] {0, 0}, Heading.N);
 
 		assertArrayEquals(new int[]{0, 0}, r.getCurrentCoordinates());
 
