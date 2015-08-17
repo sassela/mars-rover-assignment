@@ -10,4 +10,8 @@ public class HeadingTest {
 		assertEquals(3, Heading.normalise(-1));
 	}
 
+	@Test
+	public void testParseHeading() {
+		assertEquals(Heading.E, Heading.parseHeading("0 0 E"));
+	}
 }
