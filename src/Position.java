@@ -21,11 +21,9 @@ public class Position {
 	Position parsePosition(String s) {
 		// TODO catch exception.
 		String[] positionArray = s.split(" ");
-		int x = Integer.parseInt(positionArray[0]);
-		int y = Integer.parseInt(positionArray[1]);
-		Coordinates c = new Coordinates(x, y);
+		Coordinates c = coordinates.parseCoordinates(positionArray[0], positionArray[1]);
 		// TODO catch exception.
-		Heading h = Heading.valueOf(s.split(" ")[2]);
+		Heading h = Heading.parseHeading(positionArray[2]);
 		return new Position(c, h);
 
 	}

@@ -8,12 +8,9 @@ public class Coordinates {
 		this.y = y;
 	}
 
-	Coordinates parseCoordinates(String str) {
+	Coordinates parseCoordinates(String x, String y) {
 		// TODO catch exception.
-		String[] positionArray = str.split(" ");
-		x = Integer.parseInt(positionArray[0]);
-		y = Integer.parseInt(positionArray[1]);
-		return new Coordinates(x, y);
+		return new Coordinates(Integer.parseInt(x), Integer.parseInt(y));
 	}
 
 	@Override
