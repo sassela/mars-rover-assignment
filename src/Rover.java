@@ -2,16 +2,17 @@ import java.security.InvalidParameterException;
 
 public class Rover {
 	Plateau plateau;
-	int[] currentCoordinates;
+	Coordinates currentCoordinates;
 	Heading currentHeading;
 	String currentPosition;
 
-	public Rover(Plateau plateau, int[] currentCoordinates, Heading currentHeading) {
+	public Rover(Plateau plateau, Coordinates currentCoordinates, Heading currentHeading) {
 		this.plateau = plateau;
 		this.currentCoordinates = currentCoordinates;
 		this.currentHeading = currentHeading;
 	}
 
+	// TODO use Command pattern
 	public void instruct(String instructionsInput) {
 		char[] instructions = instructionsInput.toCharArray();
 		for (char instruction : instructions) {
@@ -30,16 +31,16 @@ public class Rover {
 		if (isWithinPlateauLimits()) {
 			switch (currentHeading) {
 				case N:
-					this.currentCoordinates[1]++;
+					this.currentCoordinates.incrementY();
 					break;
 				case E:
-					this.currentCoordinates[0]++;
+					this.currentCoordinates.incrementX();
 					break;
 				case S:
-					this.currentCoordinates[1]--;
+					this.currentCoordinates.decrementY();
 					break;
 				case W:
-					this.currentCoordinates[0]--;
+					this.currentCoordinates.decrementX();
 					break;
 			}
 		}
@@ -63,16 +64,8 @@ public class Rover {
 		}
 	}
 
-	public String parseCoordinates(int[] array) {
-		return array[0] + " " + array[1];
-	}
-
-	public int[] getCurrentCoordinates() {
+	public Coordinates getCurrentCoordinates() {
 		return currentCoordinates;
-	}
-
-	public void setCurrentCoordinates(int[] currentCoordinates) {
-		this.currentCoordinates = currentCoordinates;
 	}
 
 	public Heading getCurrentHeading() {
@@ -80,32 +73,27 @@ public class Rover {
 	}
 
 	public String getCurrentPosition() {
-		currentPosition = parseCoordinates(currentCoordinates) + " " + currentHeading.toString();
+		currentPosition = currentCoordinates.toString() + " " + currentHeading.toString();
 		return currentPosition;
 	}
 
 	private boolean isWithinPlateauLimits() {
 		boolean withinLimits = false;
+		int x = currentCoordinates.getX();
+		int y = currentCoordinates.getY();
+
 		switch (currentHeading) {
 			case N:
-				if (currentCoordinates[1] < this.plateau.getSize()[1]) {
-					withinLimits = true;
-				}
+				if (y < this.plateau.getSize()[1]) withinLimits = true;
 				break;
 			case E:
-				if (currentCoordinates[0] < this.plateau.getSize()[0]) {
-					withinLimits = true;
-				}
+				if (x < this.plateau.getSize()[0]) withinLimits = true;
 				break;
 			case S:
-				if (currentCoordinates[1] > 0) {
-					withinLimits = true;
-				}
+				if (y > 0) withinLimits = true;
 				break;
 			case W:
-				if (currentCoordinates[0] > 0) {
-					withinLimits = true;
-				}
+				if (x > 0) withinLimits = true;
 				break;
 		}
 		return withinLimits;

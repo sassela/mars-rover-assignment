@@ -59,7 +59,9 @@ public class MissionControl {
 	private static Rover createRoverAtPosition(String position) {
 		// TODO create Position class. catch exception. split into position parsing method
 		String[] positionArray = position.split(" ");
-		int[] coordinates = new int[]{Integer.parseInt(positionArray[0]),Integer.parseInt(positionArray[1])};
+		int x = Integer.parseInt(positionArray[0]);
+		int y = Integer.parseInt(positionArray[1]);
+		Coordinates coordinates = new Coordinates(x, y);
 		Heading heading = Heading.valueOf(positionArray[2]);
 		return new Rover(plateau, coordinates, heading);
 	}
