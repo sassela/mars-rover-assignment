@@ -7,7 +7,7 @@ public class Plateau {
 
 	public Plateau(int[] size) {
 		this.size = size;
-		rovers = new ArrayList<Rover>();
+		rovers = new ArrayList<>();
 	}
 
 	public int[] getSize() {
@@ -17,9 +17,7 @@ public class Plateau {
 	public void setSize(int[] size) {
 		// returns 0 if either coordinate is negative
 		for(int i = 0; i < size.length; i++){
-			if(size[i] < 0){
-				size[i] = 0;
-			}
+			size[i] = size[i] < 0 ? 0 : size[i];
 		}
 		this.size = size;
 	}
