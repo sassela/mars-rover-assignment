@@ -42,6 +42,17 @@ public class MissionControl {
 	private static void runMission() {
 		String positionInput = requestPositionInput();
 		String instructionInput = requestInstructionInput();
+		// deploy a new rover at the given position if none exists there already
+		Rover rover = roverExistsAt(positionInput) ? plateau.getRoverAt(positionInput) : deployRover(plateau, positionInput);
+		rover.instruct(instructionInput);
+		System.out.println("Rover moved from: " + positionInput + " to " + rover.getCurrentPosition());
+		System.out.println("Press \"X\" to terminate mission or any other key to run again");
+	}
+
+	private static boolean missionTerminated() {
+		return in.nextLine().equals("X");
+	}
+
 	private static String requestPositionInput() {
 		String positionInput;
 		do {
@@ -60,8 +71,8 @@ public class MissionControl {
 		return instructionInput;
 	}
 
-	private static boolean missionTerminated() {
-		return in.nextLine().equals("X");
+	private static boolean roverExistsAt(String position) {
+		return plateau.getRoverAt(position) != null;
 	}
 
 	static Rover deployRover(Plateau plateau, String position){
