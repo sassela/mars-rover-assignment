@@ -21,6 +21,10 @@ public class Rover {
 		this.currentPosition = currentPosition;
 	}
 
+	/**
+	 * Breaks down a series of instructions and determines what action the rover should take for each instruction
+	 * @param instructionsInput series of instructions
+	 */
 	public void instruct(String instructionsInput) {
 		char[] instructions = instructionsInput.toCharArray();
 		try {
@@ -39,6 +43,9 @@ public class Rover {
 		}
 	}
 
+	/**
+	 * Moves the rover forward one grid point depending on its current heading
+	 */
 	public void move() {
 		if (isWithinPlateauLimits()) {
 			switch (currentHeading) {
@@ -59,6 +66,10 @@ public class Rover {
 		}
 	}
 
+	/**
+	 * Rotates the rover left or right
+	 * @param direction
+	 */
 	public void turn(char direction) {
 		int headingValue = this.currentHeading.getValue();
 			switch (Character.toUpperCase(direction)) {
@@ -69,6 +80,7 @@ public class Rover {
 					headingValue++;
 					break;
 			}
+			// converts the heading integer value into the corresponding heading
 			this.currentHeading = Heading.values()[Heading.normalise(headingValue)];
 			updatePosition();
 	}
@@ -89,6 +101,10 @@ public class Rover {
 		this.currentPosition = new Position(currentCoordinates, currentHeading);
 	}
 
+	/**
+	 * Checks that the carrying out of an instruction does not take the rover outside of the plateau limits
+	 * @return variable that indicates whether the above would occur
+	 */
 	private boolean isWithinPlateauLimits() {
 		boolean withinLimits = false;
 		int x = currentCoordinates.getX();
