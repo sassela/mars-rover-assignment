@@ -19,10 +19,8 @@ public class Position {
 	}
 
 	Position parsePosition(String s) {
-		// TODO catch exception.
 		String[] positionArray = s.split(" ");
 		Coordinates c = coordinates.parseCoordinates(positionArray[0], positionArray[1]);
-		// TODO catch exception.
 		Heading h = Heading.valueOf(positionArray[2]);
 		return new Position(c, h);
 	}
