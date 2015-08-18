@@ -27,7 +27,7 @@ public class MissionControl {
 		do {
 			System.out.println("Enter the desired plateau size, in the format \"x y\". ");
 			input = in.nextLine();
-		} while (!(input.matches("^\\d+\\s\\d+")));
+		} while (!plateauSizeInputValid(input));
 		String[] size = input.split(" ");
 		return size;
 	}
@@ -67,6 +67,10 @@ public class MissionControl {
 		Rover rover = new Rover(plateau, new Position().parsePosition(position));
 		plateau.addRover(rover);
 		return rover;
+	}
+
+	private static boolean plateauSizeInputValid(String input) {
+		return input.matches("^\\d+\\s\\d+$");
 	}
 
 	private static boolean positionInputValid(String input) {
