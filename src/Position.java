@@ -30,9 +30,9 @@ public class Position {
 
 	Position parsePosition(String s) {
 		String[] positionArray = s.split(" ");
-		Coordinates c = coordinates.parseCoordinates(positionArray[0], positionArray[1]);
-		Heading h = Heading.valueOf(positionArray[2]);
-		return new Position(c, h);
+		Coordinates coord = coordinates.parseCoordinates(positionArray[0], positionArray[1]);
+		Heading head = Heading.valueOf(positionArray[2]);
+		return new Position(coord, head);
 	}
 
 	public Coordinates getCoordinates() {
