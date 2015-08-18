@@ -15,7 +15,6 @@ public class MissionControl {
 	static Plateau plateau;
 	static Scanner in = new Scanner(System.in);
 
-
 	public static void main (String[] args){
 		printWelcomeMessage();
 		setPlateauSize(requestPlateauSizeInput());
@@ -38,8 +37,7 @@ public class MissionControl {
 			System.out.println("Enter the desired plateau size, in the format \"x y\". ");
 			input = in.nextLine();
 		} while (!plateauSizeInputValid(input));
-		String[] size = input.split(" ");
-		return size;
+		return input.split(" ");
 	}
 
 	private static void setPlateauSize(String[] sizeInput) {
@@ -49,10 +47,13 @@ public class MissionControl {
 		System.out.println("Plateau size had been set as "+plateau.getWidth()+" by "+plateau.getHeight()+".");
 	}
 
+	/**
+	 * Runs the Mars Rover instruction sequences until termination is requested by the user
+	 */
 	private static void runMission() {
 		String positionInput = requestPositionInput();
 		String instructionInput = requestInstructionInput();
-		// deploy a new rover at the given position if none exists there already
+		// deploys a new rover at the given position if none exists there already
 		Rover rover = roverExistsAt(positionInput) ? plateau.getRoverAt(positionInput) : deployRover(plateau, positionInput);
 		rover.instruct(instructionInput);
 		System.out.println("Rover moved from: " + positionInput + " to " + rover.getCurrentPosition());
@@ -95,6 +96,11 @@ public class MissionControl {
 		return input.matches("^\\d+\\s\\d+$");
 	}
 
+	/**
+	 * Checks the user input is valid according to the plateau size and required format
+	 * @param input user input
+	 * @return variable indicating whether the format is valid
+	 */
 	private static boolean positionInputValid(String input) {
 		String headingOptions = "";
 		int width = plateau.getWidth();
