@@ -9,9 +9,4 @@ public class HeadingTest {
 		assertEquals(2, Heading.normalise(2));
 		assertEquals(3, Heading.normalise(-1));
 	}
-
-	@Test
-	public void testParseHeading() {
-		assertEquals(Heading.E, Heading.parseHeading("E"));
-	}
 }
