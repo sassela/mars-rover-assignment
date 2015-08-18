@@ -40,11 +40,15 @@ public class MissionControl {
 	}
 
 	private static void runMission() {
+		String positionInput = requestPositionInput();
+	private static String requestPositionInput() {
 		String positionInput;
 		do {
 			System.out.println("Enter the rover's position eg. \"1 2 N\"");
 			positionInput = in.nextLine();
 		} while (!positionInputValid(positionInput));
+		return positionInput;
+	}
 
 		String instructionInput;
 		do {
