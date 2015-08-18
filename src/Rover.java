@@ -1,5 +1,3 @@
-import java.security.InvalidParameterException;
-
 public class Rover {
 	Plateau plateau;
 	Coordinates currentCoordinates;
@@ -16,15 +14,19 @@ public class Rover {
 	// TODO use Command pattern
 	public void instruct(String instructionsInput) {
 		char[] instructions = instructionsInput.toCharArray();
-		for (char instruction : instructions) {
-			switch (Character.toUpperCase(instruction)) {
-				case 'M':
-					this.move();
-					break;
-				case 'L':case 'R':
-					this.turn(instruction);
-					break;
+		try {
+			for (char instruction : instructions) {
+				switch (Character.toUpperCase(instruction)) {
+					case 'M':
+						this.move();
+						break;
+					case 'L':case 'R':
+						this.turn(instruction);
+						break;
+				}
 			}
+		} catch (Exception e) {
+			e.printStackTrace();
 		}
 	}
 
@@ -51,7 +53,6 @@ public class Rover {
 
 	public void turn(char direction) {
 		int heading = this.currentHeading.getValue();
-		try {
 			switch (Character.toUpperCase(direction)) {
 				case 'L':
 					heading--;
@@ -64,9 +65,6 @@ public class Rover {
 			//TODO tidy me.
 			updatePosition();
 
-		} catch (InvalidParameterException e) {
-			System.err.println("Caught Exception: " +  e.getMessage());
-		}
 	}
 
 	public Coordinates getCurrentCoordinates() {
