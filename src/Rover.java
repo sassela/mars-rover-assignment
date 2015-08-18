@@ -17,11 +17,11 @@ public class Rover {
 	public void instruct(String instructionsInput) {
 		char[] instructions = instructionsInput.toCharArray();
 		for (char instruction : instructions) {
-			switch (instruction) {
+			switch (Character.toUpperCase(instruction)) {
 				case 'M':
 					this.move();
 					break;
-				default:
+				case 'L':case 'R':
 					this.turn(instruction);
 					break;
 			}
@@ -52,7 +52,7 @@ public class Rover {
 	public void turn(char direction) {
 		int heading = this.currentHeading.getValue();
 		try {
-			switch (direction) {
+			switch (Character.toUpperCase(direction)) {
 				case 'L':
 					heading--;
 					break;
