@@ -41,6 +41,7 @@ public class MissionControl {
 
 	private static void runMission() {
 		String positionInput = requestPositionInput();
+		String instructionInput = requestInstructionInput();
 	private static String requestPositionInput() {
 		String positionInput;
 		do {
@@ -50,17 +51,13 @@ public class MissionControl {
 		return positionInput;
 	}
 
+	private static String requestInstructionInput() {
 		String instructionInput;
 		do {
 			System.out.println("Enter the rover's instructions eg. \"LMLMLMLMM\"");
 			instructionInput = in.nextLine();
 		} while (!instructionInputValid(instructionInput));
-
-		// deploy a new rover at the given position if none exists there already
-		Rover existingRover = plateau.getRoverAt(positionInput);
-		Rover rover = existingRover == null ? deployRover(plateau, positionInput) : existingRover;
-		rover.instruct(instructionInput);
-		System.out.println("Rover moved from: " + positionInput + " to " + rover.getCurrentPosition());
+		return instructionInput;
 	}
 
 	private static boolean missionTerminated() {
