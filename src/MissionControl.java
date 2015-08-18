@@ -15,7 +15,7 @@ public class MissionControl {
 	}
 
 	private static void printWelcomeMessage() {
-		System.out.println("Welcome to the Mars Rover Mission Control. Enter \"X\" at any point to terminate the mission\"");
+		System.out.println("Welcome to the Mars Rover Mission Control.");
 	}
 
 	private static void printClosingMessage() {

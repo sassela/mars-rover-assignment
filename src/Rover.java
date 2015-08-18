@@ -11,7 +11,6 @@ public class Rover {
 		this.currentPosition = currentPosition;
 	}
 
-	// TODO use Command pattern
 	public void instruct(String instructionsInput) {
 		char[] instructions = instructionsInput.toCharArray();
 		try {
@@ -46,25 +45,22 @@ public class Rover {
 					this.currentCoordinates.decrementX();
 					break;
 			}
-			//TODO tidy me.
 			updatePosition();
 		}
 	}
 
 	public void turn(char direction) {
-		int heading = this.currentHeading.getValue();
+		int headingValue = this.currentHeading.getValue();
 			switch (Character.toUpperCase(direction)) {
 				case 'L':
-					heading--;
+					headingValue--;
 					break;
 				case 'R':
-					heading++;
+					headingValue++;
 					break;
 			}
-			this.currentHeading = Heading.values()[Heading.normalise(heading)];
-			//TODO tidy me.
+			this.currentHeading = Heading.values()[Heading.normalise(headingValue)];
 			updatePosition();
-
 	}
 
 	public Coordinates getCurrentCoordinates() {
