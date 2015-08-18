@@ -23,8 +23,13 @@ public class MissionControl {
 	}
 
 	private static String[] requestPlateauSizeInput(){
-		System.out.println("Enter the desired plateau size, in the format \"x y\". ");
-		return in.nextLine().split(" ");
+		String input;
+		do {
+			System.out.println("Enter the desired plateau size, in the format \"x y\". ");
+			input = in.nextLine();
+		} while (!(input.matches("^\\d+\\s\\d+")));
+		String[] size = input.split(" ");
+		return size;
 	}
 
 	private static void setPlateauSize(String[] sizeInput) {

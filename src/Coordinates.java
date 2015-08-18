@@ -9,7 +9,6 @@ public class Coordinates {
 	}
 
 	Coordinates parseCoordinates(String x, String y) {
-		// TODO catch exception.
 		return new Coordinates(Integer.parseInt(x), Integer.parseInt(y));
 	}
 
