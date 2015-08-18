@@ -87,13 +87,15 @@ public class MissionControl {
 
 	private static boolean positionInputValid(String input) {
 		String headingOptions = "";
+		int width = plateau.getSize()[0];
+		int height = plateau.getSize()[1];
 		for(Heading heading : Heading.values()){
 			headingOptions += heading.toString();
 		}
-		return input.matches("^\\d+\\s\\d+\\s["+headingOptions+"]$");
+		return input.matches("^[0-"+width+"]+\\s[0-"+height+"]+\\s["+headingOptions+"]$");
 	}
 
 	private static boolean instructionInputValid(String input) {
-		return input.matches("^[a-zA-Z]+$");
+		return input.matches("^[LRMlrm]+$");
 	}
 }
