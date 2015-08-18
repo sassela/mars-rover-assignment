@@ -17,6 +17,11 @@ public enum Heading {
 		this.value = ordinal();
 	}
 
+	/**
+	 * Converts an angle unit integer value into the corresponding heading according to the number of options
+	 * @param prenormalised angle unit integer value
+	 * @return corresponding heading
+	 */
 	public static int normalise(int prenormalised) {
 		int headingSize = Heading.values().length;
 		return prenormalised % headingSize < 0 ? ((prenormalised % headingSize) + headingSize) : prenormalised % headingSize;

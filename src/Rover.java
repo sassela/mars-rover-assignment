@@ -71,17 +71,17 @@ public class Rover {
 	 * @param direction
 	 */
 	public void turn(char direction) {
-		int headingValue = this.currentHeading.getValue();
+		int angleUnit = this.currentHeading.getValue();
 			switch (Character.toUpperCase(direction)) {
 				case 'L':
-					headingValue--;
+					angleUnit--;
 					break;
 				case 'R':
-					headingValue++;
+					angleUnit++;
 					break;
 			}
-			// converts the heading integer value into the corresponding heading
-			this.currentHeading = Heading.values()[Heading.normalise(headingValue)];
+			// converts the angle unit integer value into the corresponding heading
+			this.currentHeading = Heading.values()[Heading.normalise(angleUnit)];
 			updatePosition();
 	}
 
