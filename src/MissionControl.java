@@ -40,10 +40,12 @@ public class MissionControl {
 	}
 
 	private static void runMission() {
-		System.out.println("Enter the rover's position eg. \"1 2 N\"");
-		String positionInput = in.nextLine();
-		System.out.println("Enter the rover's instructions eg. \"LMLMLMLMM\"");
-		String instructionInput = in.nextLine();
+		String positionInput;
+		do {
+			System.out.println("Enter the rover's position eg. \"1 2 N\"");
+			positionInput = in.nextLine();
+		} while (!positionInputValid(positionInput));
+
 		String instructionInput;
 		do {
 			System.out.println("Enter the rover's instructions eg. \"LMLMLMLMM\"");
@@ -65,6 +67,14 @@ public class MissionControl {
 		Rover rover = new Rover(plateau, new Position().parsePosition(position));
 		plateau.addRover(rover);
 		return rover;
+	}
+
+	private static boolean positionInputValid(String input) {
+		String headingOptions = "";
+		for(Heading heading : Heading.values()){
+			headingOptions += heading.toString();
+		}
+		return input.matches("^\\d+\\s\\d+\\s["+headingOptions+"]$");
 	}
 
 	private static boolean instructionInputValid(String input) {
