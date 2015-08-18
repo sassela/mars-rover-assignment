@@ -44,6 +44,12 @@ public class MissionControl {
 		String positionInput = in.nextLine();
 		System.out.println("Enter the rover's instructions eg. \"LMLMLMLMM\"");
 		String instructionInput = in.nextLine();
+		String instructionInput;
+		do {
+			System.out.println("Enter the rover's instructions eg. \"LMLMLMLMM\"");
+			instructionInput = in.nextLine();
+		} while (!instructionInputValid(instructionInput));
+
 		// deploy a new rover at the given position if none exists there already
 		Rover existingRover = plateau.getRoverAt(positionInput);
 		Rover rover = existingRover == null ? deployRover(plateau, positionInput) : existingRover;
@@ -59,5 +65,9 @@ public class MissionControl {
 		Rover rover = new Rover(plateau, new Position().parsePosition(position));
 		plateau.addRover(rover);
 		return rover;
+	}
+
+	private static boolean instructionInputValid(String input) {
+		return input.matches("^[a-zA-Z]+$");
 	}
 }
