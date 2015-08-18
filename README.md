@@ -23,3 +23,19 @@ Assume that the square directly North from (x, y) is (x, y+1).
 ###Output:
 
 * The output for each rover should be its final co-ordinates and heading.
+
+##Application Instructions
+
+This application can be run from the command line. To run:
+
+* Open a terminal window
+
+* Navigate to the src directory of the (unzipped) application file
+
+* Run the compiler by typing `javac Missioncontrol.java`
+
+* Run the java interpreter by typing `java MissionControl`
+
+* You should see the program output `"Welcome to the Mars Rover Mission Control."`
+
+* Follow the subsequent prompts
