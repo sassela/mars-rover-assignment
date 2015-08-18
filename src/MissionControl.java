@@ -36,7 +36,7 @@ public class MissionControl {
 		int width = Integer.parseInt(sizeInput[0]);
 		int height = Integer.parseInt(sizeInput[1]);
 		plateau = new Plateau(new int[] {width, height});
-		System.out.println("Plateau size had been set as "+plateau.getSize()[0]+" by "+plateau.getSize()[1]+".");
+		System.out.println("Plateau size had been set as "+plateau.getWidth()+" by "+plateau.getHeight()+".");
 	}
 
 	private static void runMission() {
@@ -87,8 +87,8 @@ public class MissionControl {
 
 	private static boolean positionInputValid(String input) {
 		String headingOptions = "";
-		int width = plateau.getSize()[0];
-		int height = plateau.getSize()[1];
+		int width = plateau.getWidth();
+		int height = plateau.getHeight();
 		for(Heading heading : Heading.values()){
 			headingOptions += heading.toString();
 		}

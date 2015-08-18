@@ -86,10 +86,10 @@ public class Rover {
 
 		switch (currentHeading) {
 			case N:
-				if (y < this.plateau.getSize()[1]) withinLimits = true;
+				if (y < this.plateau.getHeight()) withinLimits = true;
 				break;
 			case E:
-				if (x < this.plateau.getSize()[0]) withinLimits = true;
+				if (x < this.plateau.getWidth()) withinLimits = true;
 				break;
 			case S:
 				if (y > 0) withinLimits = true;

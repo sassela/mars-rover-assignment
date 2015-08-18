@@ -9,16 +9,16 @@ public class PlateauTest {
 		Plateau p = new Plateau(singleCell);
 
 		p.setSize(new int[] {5, 5});
-		assertArrayEquals(new int[] {5, 5}, p.getSize());
+		assertEquals(5, p.getWidth());
+		assertEquals(5, p.getHeight());
 
 		p.setSize(new int[] {-50, 50});
-		assertArrayEquals(new int[] {0, 50}, p.getSize());
+		assertEquals(0, p.getWidth());
+		assertEquals(50, p.getHeight());
 
 		p.setSize(new int[] {-500, -500});
-		assertArrayEquals(singleCell, p.getSize());
-
-		p.setSize(singleCell);
-		assertArrayEquals(singleCell, p.getSize());
+		assertEquals(0, p.getWidth());
+		assertEquals(0, p.getHeight());
 	}
 
 	@Test
