@@ -68,7 +68,7 @@ public class Rover {
 
 	/**
 	 * Rotates the rover left or right
-	 * @param direction
+	 * @param direction updated rover direction
 	 */
 	public void turn(char direction) {
 		int angleUnit = this.currentHeading.getValue();
