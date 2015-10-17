@@ -45,4 +45,15 @@ public class RoverTest {
 		r.move();
 		assertEquals(new Coordinates(0, 1).toString(), r.getCurrentCoordinates().toString());
 	}
+
+	@Test
+	public void testLeaveBeacon() {
+		Rover r = new Rover(p, bottomLeft);
+
+		assertEquals(false, p.beaconExistsAt(bottomLeft.getCoordinates()));
+		r.turn('L');
+		r.move();
+		assertEquals(true, p.beaconExistsAt(bottomLeft.getCoordinates()));
+
+	}
 }

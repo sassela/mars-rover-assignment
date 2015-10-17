@@ -14,6 +14,7 @@ public class Plateau {
 
 	int[] size;
 	ArrayList<Rover> rovers;
+	ArrayList<Coordinates> beacons;
 
 	public Plateau(int[] size) {
 		this.size = size;
@@ -48,5 +49,17 @@ public class Plateau {
 			}
 		}
 		return roverAtPosition;
+	}
+
+	boolean isOnEdge(Coordinates coordinates) {
+
+	}
+
+	void setBeaconAt(Coordinates coordinates) {
+		beacons.add(coordinates);
+	}
+
+	public boolean beaconExistsAt(Coordinates coordinates) {
+		return (beacons.contains(coordinates));
 	}
 }
