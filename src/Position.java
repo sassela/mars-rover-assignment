@@ -18,21 +18,35 @@ public class Position {
 		this.heading = heading;
 	}
 
-	Position() {
-		this.coordinates = new Coordinates(0, 0);
-		this.heading = Heading.N;
-	}
-
 	@Override
 	public String toString() {
 		return coordinates.toString() + " " + heading.toString();
 	}
 
-	Position parsePosition(String s) {
+	static Position parsePosition(String s) {
 		String[] positionArray = s.split(" ");
-		Coordinates coord = coordinates.parseCoordinates(positionArray[0], positionArray[1]);
+		Coordinates coord = Coordinates.parseCoordinates(positionArray[0], positionArray[1]);
 		Heading head = Heading.valueOf(positionArray[2]);
 		return new Position(coord, head);
+	}
+
+	/**
+	 * Checks the user input is valid according to the plateau size and required format
+	 * @param input user input
+	 * @return variable indicating whether the format is valid
+	 */
+	static boolean positionInputValid(Plateau plateau, String input) {
+		int inputX = parsePosition(input).getCoordinates().getX();
+		int inputY = parsePosition(input).getCoordinates().getY();
+		Heading inputHeading = parsePosition(input).getHeading();
+
+		boolean inputXIsValid = inputX < plateau.getWidth();
+		boolean inputYIsValid = inputY < plateau.getHeight();
+
+		boolean inputHeadingIsValid = false;
+		for (Heading heading : Heading.values()) if (inputHeading == heading) inputHeadingIsValid = true;
+
+		return (inputXIsValid && inputYIsValid && inputHeadingIsValid);
 	}
 
 	public Coordinates getCoordinates() {

@@ -34,8 +34,9 @@ public class MissionControl {
 	private static String[] requestPlateauSizeInput(){
 		String input;
 		do {
-			System.out.println("Enter the desired plateau size, in the format \"x y\". ");
+			System.out.println("Enter the desired plateau size, in the format \"x y\", whre x and y are positive integers.");
 			input = in.nextLine();
+			if (!plateauSizeInputValid(input)) System.out.println("Invalid plateau size entered.");
 		} while (!plateauSizeInputValid(input));
 		return input.split(" ");
 	}
@@ -69,7 +70,7 @@ public class MissionControl {
 		do {
 			System.out.println("Enter the rover's position eg. \"1 2 N\"");
 			positionInput = in.nextLine();
-		} while (!positionInputValid(positionInput));
+		} while (!Position.positionInputValid(plateau, positionInput));
 		return positionInput;
 	}
 
@@ -87,28 +88,13 @@ public class MissionControl {
 	}
 
 	static Rover deployRover(Plateau plateau, String position){
-		Rover rover = new Rover(plateau, new Position().parsePosition(position));
+		Rover rover = new Rover(plateau, Position.parsePosition(position));
 		plateau.addRover(rover);
 		return rover;
 	}
 
 	private static boolean plateauSizeInputValid(String input) {
 		return input.matches("^\\d+\\s\\d+$");
-	}
-
-	/**
-	 * Checks the user input is valid according to the plateau size and required format
-	 * @param input user input
-	 * @return variable indicating whether the format is valid
-	 */
-	private static boolean positionInputValid(String input) {
-		String headingOptions = "";
-		int width = plateau.getWidth();
-		int height = plateau.getHeight();
-		for(Heading heading : Heading.values()){
-			headingOptions += heading.toString();
-		}
-		return input.matches("^[0-"+width+"]+\\s[0-"+height+"]+\\s["+headingOptions+"]$");
 	}
 
 	private static boolean instructionInputValid(String input) {

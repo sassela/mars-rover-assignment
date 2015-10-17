@@ -12,6 +12,10 @@ public class PlateauTest {
 		assertEquals(5, p.getWidth());
 		assertEquals(5, p.getHeight());
 
+		p.setSize(new int[] {10, 10});
+		assertEquals(10, p.getWidth());
+		assertEquals(10, p.getHeight());
+
 		p.setSize(new int[] {-50, 50});
 		assertEquals(0, p.getWidth());
 		assertEquals(50, p.getHeight());
