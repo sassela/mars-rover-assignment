@@ -26,7 +26,7 @@ public class Position {
 	static Position parsePosition(String s) {
 		String[] positionArray = s.split(" ");
 		Coordinates coord = Coordinates.parseCoordinates(positionArray[0], positionArray[1]);
-		Heading head = Heading.valueOf(positionArray[2]);
+		Heading head = Heading.valueOf((positionArray[2]).toUpperCase());
 		return new Position(coord, head);
 	}
 
@@ -40,8 +40,8 @@ public class Position {
 		int inputY = parsePosition(input).getCoordinates().getY();
 		Heading inputHeading = parsePosition(input).getHeading();
 
-		boolean inputXIsValid = inputX < plateau.getWidth();
-		boolean inputYIsValid = inputY < plateau.getHeight();
+		boolean inputXIsValid = inputX >= 0 && inputX < plateau.getWidth();
+		boolean inputYIsValid = inputY >= 0 && inputY < plateau.getHeight();
 
 		boolean inputHeadingIsValid = false;
 		for (Heading heading : Heading.values()) if (inputHeading == heading) inputHeadingIsValid = true;

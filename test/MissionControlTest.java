@@ -9,7 +9,7 @@ public class MissionControlTest {
 
 		assertEquals(null, p.getRoverAt("0 0 N"));
 
-		Rover rover = MissionControl.deployRover(p, "0 0 N");
+		Rover rover = p.deployRover("0 0 N");
 		assertEquals("0 0 N", rover.getCurrentPosition());
 		assertEquals(null, p.getRoverAt("0 0 E"));
 

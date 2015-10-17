@@ -16,36 +16,38 @@ public class MissionControl {
 	static Scanner in = new Scanner(System.in);
 
 	public static void main (String[] args){
-		printWelcomeMessage();
-		setPlateauSize(requestPlateauSizeInput());
+		printUserMessage("welcome");
+		plateau = Plateau.setPlateauSizeFromInput(requestPlateauSizeInput());
+		printUserMessage("plateau size");
 		do { runMission(); } while(!missionTerminated());
 		in.close();
-		printClosingMessage();
+		printUserMessage("close");
 	}
 
-	private static void printWelcomeMessage() {
-		System.out.println("Welcome to the Mars Rover Mission Control.");
-	}
-
-	private static void printClosingMessage() {
-		System.out.println("Mission Terminated");
+	private static void printUserMessage(String userMessageType) {
+		switch (userMessageType) {
+			case "welcome":
+				System.out.println("Welcome to the Mars Rover Mission Control.");
+				break;
+			case "close":
+				System.out.println("Mission Terminated.");
+				break;
+			case "plateau size":
+				System.out.println("Plateau size had been set as "+plateau.getWidth()+" by "+plateau.getHeight()+".");
+				break;
+			case "invalid input":
+				System.out.println("Invalid input.");
+		}
 	}
 
 	private static String[] requestPlateauSizeInput(){
 		String input;
 		do {
-			System.out.println("Enter the desired plateau size, in the format \"x y\", whre x and y are positive integers.");
+			System.out.println("Enter the desired plateau size, in the format \"x y\", where x and y are positive integers.");
 			input = in.nextLine();
-			if (!plateauSizeInputValid(input)) System.out.println("Invalid plateau size entered.");
-		} while (!plateauSizeInputValid(input));
+			if (!Instructions.plateauSizeInputValid(input)) printUserMessage("invalid input");
+		} while (!Instructions.plateauSizeInputValid(input));
 		return input.split(" ");
-	}
-
-	private static void setPlateauSize(String[] sizeInput) {
-		int width = Integer.parseInt(sizeInput[0]);
-		int height = Integer.parseInt(sizeInput[1]);
-		plateau = new Plateau(new int[] {width, height});
-		System.out.println("Plateau size had been set as "+plateau.getWidth()+" by "+plateau.getHeight()+".");
 	}
 
 	/**
@@ -55,7 +57,7 @@ public class MissionControl {
 		String positionInput = requestPositionInput();
 		String instructionInput = requestInstructionInput();
 		// deploys a new rover at the given position if none exists there already
-		Rover rover = roverExistsAt(positionInput) ? plateau.getRoverAt(positionInput) : deployRover(plateau, positionInput);
+		Rover rover = plateau.roverExistsAt(positionInput) ? plateau.getRoverAt(positionInput) : plateau.deployRover(positionInput);
 		rover.instruct(instructionInput);
 		System.out.println("Rover moved from: " + positionInput + " to " + rover.getCurrentPosition());
 		System.out.println("Press \"X\" to terminate mission or any other key to run again");
@@ -70,6 +72,7 @@ public class MissionControl {
 		do {
 			System.out.println("Enter the rover's position eg. \"1 2 N\"");
 			positionInput = in.nextLine();
+			if(!Position.positionInputValid(plateau, positionInput)) printUserMessage("invalid input");
 		} while (!Position.positionInputValid(plateau, positionInput));
 		return positionInput;
 	}
@@ -79,25 +82,8 @@ public class MissionControl {
 		do {
 			System.out.println("Enter the rover's instructions eg. \"LMLMLMLMM\"");
 			instructionInput = in.nextLine();
-		} while (!instructionInputValid(instructionInput));
+			if (!Instructions.instructionInputValid(instructionInput)) printUserMessage("invalid input");
+		} while (!Instructions.instructionInputValid(instructionInput));
 		return instructionInput;
-	}
-
-	private static boolean roverExistsAt(String position) {
-		return plateau.getRoverAt(position) != null;
-	}
-
-	static Rover deployRover(Plateau plateau, String position){
-		Rover rover = new Rover(plateau, Position.parsePosition(position));
-		plateau.addRover(rover);
-		return rover;
-	}
-
-	private static boolean plateauSizeInputValid(String input) {
-		return input.matches("^\\d+\\s\\d+$");
-	}
-
-	private static boolean instructionInputValid(String input) {
-		return input.matches("^[LRMlrm]+$");
 	}
 }
