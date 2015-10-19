@@ -62,7 +62,6 @@ public class Rover {
 					this.currentCoordinates.decrementX();
 					break;
 			}
-			updatePosition();
 		}
 	}
 
@@ -82,7 +81,6 @@ public class Rover {
 		}
 		// converts the angle unit integer value into the corresponding heading
 		this.currentHeading = Heading.values()[Heading.normalise(angleUnit)];
-		updatePosition();
 	}
 
 	public Coordinates getCurrentCoordinates() {
@@ -95,10 +93,6 @@ public class Rover {
 
 	public String getCurrentPosition() {
 		return currentPosition.toString();
-	}
-
-	public void updatePosition() {
-		this.currentPosition = new Position(currentCoordinates, currentHeading);
 	}
 
 	/**

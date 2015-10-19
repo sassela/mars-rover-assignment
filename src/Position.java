@@ -23,32 +23,6 @@ public class Position {
 		return coordinates.toString() + " " + heading.toString();
 	}
 
-	static Position parsePosition(String s) {
-		String[] positionArray = s.split(" ");
-		Coordinates coord = Coordinates.parseCoordinates(positionArray[0], positionArray[1]);
-		Heading head = Heading.valueOf((positionArray[2]).toUpperCase());
-		return new Position(coord, head);
-	}
-
-	/**
-	 * Checks the user input is valid according to the plateau size and required format
-	 * @param input user input
-	 * @return variable indicating whether the format is valid
-	 */
-	static boolean positionInputValid(Plateau plateau, String input) {
-		int inputX = parsePosition(input).getCoordinates().getX();
-		int inputY = parsePosition(input).getCoordinates().getY();
-		Heading inputHeading = parsePosition(input).getHeading();
-
-		boolean inputXIsValid = inputX >= 0 && inputX < plateau.getWidth();
-		boolean inputYIsValid = inputY >= 0 && inputY < plateau.getHeight();
-
-		boolean inputHeadingIsValid = false;
-		for (Heading heading : Heading.values()) if (inputHeading == heading) inputHeadingIsValid = true;
-
-		return (inputXIsValid && inputYIsValid && inputHeadingIsValid);
-	}
-
 	public Coordinates getCoordinates() {
 		return coordinates;
 	}

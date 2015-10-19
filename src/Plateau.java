@@ -28,19 +28,12 @@ public class Plateau {
 		this.size = size;
 	}
 
-
-	static Plateau setPlateauSizeFromInput(String[] sizeInput) {
-		int width = Integer.parseInt(sizeInput[0]);
-		int height = Integer.parseInt(sizeInput[1]);
-		return new Plateau(new int[] {width, height});
-	}
-
 	boolean roverExistsAt(String position) {
 		return this.getRoverAt(position) != null;
 	}
 
 	Rover deployRover(String position){
-		Rover rover = new Rover(this, Position.parsePosition(position));
+		Rover rover = new Rover(this, Parser.parsePosition(position));
 		this.addRover(rover);
 		return rover;
 	}

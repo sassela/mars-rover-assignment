@@ -18,10 +18,6 @@ public class Coordinates {
 		this.y = y;
 	}
 
-	static Coordinates parseCoordinates(String x, String y) {
-		return new Coordinates(Integer.parseInt(x), Integer.parseInt(y));
-	}
-
 	@Override
 	public String toString() {
 		return x + " " + y;
