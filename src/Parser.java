@@ -3,11 +3,12 @@
  */
 public class Parser {
 
-	private static Coordinates parseCoordinates(String x, String y) {
+	//TODO add exceptions to all of these
+	static Coordinates parseCoordinates(String x, String y) {
 		return new Coordinates(Integer.parseInt(x), Integer.parseInt(y));
 	}
 
-	private static Heading parseHeading(String s) {
+	static Heading parseHeading(String s) {
 		return Heading.valueOf(s.toUpperCase());
 	}
 

@@ -45,4 +45,6 @@ public class RoverTest {
 		r.move();
 		assertEquals(new Coordinates(0, 1).toString(), r.getCurrentCoordinates().toString());
 	}
+
+	//TODO ISWITHIN PLATEAU LIMITS
 }

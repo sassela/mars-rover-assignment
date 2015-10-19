@@ -26,6 +26,18 @@ public class PlateauTest {
 	}
 
 	@Test
+	public void testDeployRover() {
+		Plateau p = new Plateau(new int[] {5, 5});
+
+		assertEquals(null, p.getRoverAt("0 0 N"));
+
+		Rover rover = p.deployRover("0 0 N");
+		assertEquals("0 0 N", rover.getCurrentPosition());
+		assertEquals(null, p.getRoverAt("0 0 E"));
+
+	}
+
+	@Test
 	public void testGetRoverAt() {
 		Plateau plateau = new Plateau(new int[] {5,5});
 		Position position = new Position(new Coordinates(5, 5), Heading.E);

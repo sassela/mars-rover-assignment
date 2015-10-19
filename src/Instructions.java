@@ -7,7 +7,7 @@ public class Instructions {
 	static Scanner in = new Scanner(System.in);
 
 	static boolean plateauSizeInputValid(String input) {
-		return input.matches("^\\d+\\s\\d+$");
+		return input.matches("^\\d+\\s\\d+\\s?$");
 	}
 
 	/**

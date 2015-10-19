@@ -21,6 +21,11 @@ public class Rover {
 		this.currentPosition = currentPosition;
 	}
 
+	public void updatePosition() {
+		this.currentPosition = new Position(currentCoordinates, currentHeading);
+	}
+
+
 	/**
 	 * Breaks down a series of instructions and determines what action the rover should take for each instruction
 	 * @param instructionsInput series of instructions
@@ -38,6 +43,7 @@ public class Rover {
 						break;
 				}
 			}
+			updatePosition();
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
@@ -62,6 +68,7 @@ public class Rover {
 					this.currentCoordinates.decrementX();
 					break;
 			}
+			updatePosition();
 		}
 	}
 
