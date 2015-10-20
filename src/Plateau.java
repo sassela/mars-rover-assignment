@@ -28,11 +28,17 @@ public class Plateau {
 		this.size = size;
 	}
 
-	boolean roverExistsAt(String position) {
-		return this.getRoverAt(position) != null;
+	public Rover getRoverAt(String position) {
+		Rover roverAtPosition = null;
+		for (Rover rover : rovers) {
+			if (rover.getCurrentPosition().equals(position)) {
+				roverAtPosition = rover;
+			}
+		}
+		return roverAtPosition;
 	}
 
-	Rover deployRover(String position){
+	Rover deployRoverAt(String position) {
 		Rover rover = new Rover(this, Parser.parsePosition(position));
 		this.addRover(rover);
 		return rover;
@@ -48,15 +54,5 @@ public class Plateau {
 
 	public void addRover(Rover rover) {
 		rovers.add(rover);
-	}
-
-	public Rover getRoverAt(String position) {
-		Rover roverAtPosition = null;
-		for (Rover rover : rovers) {
-			if (rover.getCurrentPosition().equals(position)) {
-				roverAtPosition = rover;
-			}
-		}
-		return roverAtPosition;
 	}
 }

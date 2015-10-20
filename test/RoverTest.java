@@ -1,5 +1,7 @@
 import org.junit.Test;
 import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.assertTrue;
+import static org.junit.Assert.assertFalse;
 
 public class RoverTest {
 	Plateau p = new Plateau(new int[] {5, 5});
@@ -28,6 +30,14 @@ public class RoverTest {
 	}
 
 	@Test
+	public void testMove(){
+		Rover r = new Rover(p, bottomLeft);
+
+		r.move();
+		assertEquals(new Coordinates(0, 1).toString(), r.getCurrentCoordinates().toString());
+	}
+
+	@Test
 	public void testTurn(){
 		Rover r = new Rover(p, bottomLeft);
 
@@ -39,12 +49,15 @@ public class RoverTest {
 	}
 
 	@Test
-	public void testMove(){
+	public void testIsWithinPlateauLimits() {
 		Rover r = new Rover(p, bottomLeft);
-
-		r.move();
-		assertEquals(new Coordinates(0, 1).toString(), r.getCurrentCoordinates().toString());
+		// Rover facing North. Would be safe to move forward
+		assertTrue(r.isWithinPlateauLimits());
+		// Rover facing East. Would be safe to move forward
+		r.turn('R');
+		assertTrue(r.isWithinPlateauLimits());
+		// Rover facing South. Would not be safe to move forward
+		r.turn('R');
+		assertFalse(r.isWithinPlateauLimits());
 	}
-
-	//TODO ISWITHIN PLATEAU LIMITS
 }

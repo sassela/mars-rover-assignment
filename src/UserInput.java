@@ -3,7 +3,7 @@ import java.util.Scanner;
 /**
  * Created by abby on 17/10/15.
  */
-public class Instructions {
+public class UserInput {
 	static Scanner in = new Scanner(System.in);
 
 	static boolean plateauSizeInputValid(String input) {
@@ -32,8 +32,6 @@ public class Instructions {
 	static boolean instructionInputValid(String input) {
 		return input.matches("^[LRMlrm]+$");
 	}
-
-	static void invalidInputMessage() { System.out.println("Invalid input."); }
 
 	static String[] requestPlateauSizeInput(){
 		String input;
@@ -64,6 +62,8 @@ public class Instructions {
 		} while (!instructionInputValid(instructionInput));
 		return instructionInput;
 	}
+
+	static void invalidInputMessage() { System.out.println("Invalid input."); }
 
 	static boolean missionTerminated() {
 		boolean terminationRequested = in.nextLine().equals("X");

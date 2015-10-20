@@ -106,7 +106,7 @@ public class Rover {
 	 * Checks that the carrying out of an instruction does not take the rover outside of the plateau limits
 	 * @return variable that indicates whether the above would occur
 	 */
-	private boolean isWithinPlateauLimits() {
+	boolean isWithinPlateauLimits() {
 		boolean withinLimits = false;
 		int x = currentCoordinates.getX();
 		int y = currentCoordinates.getY();

@@ -19,7 +19,7 @@ public class Parser {
 		return new Position(coordinates, heading);
 	}
 
-	static Plateau parsePlateauSize(String[] sizeInput) {
-		return new Plateau(new int[] {Integer.parseInt(sizeInput[0]), Integer.parseInt(sizeInput[1])});
+	static int[] parsePlateauSize(String[] s) {
+		return new int[] {Integer.parseInt(s[0]), Integer.parseInt(s[1])};
 	}
 }
