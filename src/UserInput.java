@@ -16,17 +16,20 @@ public class UserInput {
 	 * @return variable indicating whether the format is valid
 	 */
 	static boolean positionInputValid(Plateau plateau, String positionInput) {
-		int inputX = Parser.parsePosition(positionInput).getCoordinates().getX();
-		int inputY = Parser.parsePosition(positionInput).getCoordinates().getY();
-		Heading inputHeading = Parser.parsePosition(positionInput).getHeading();
+		boolean inputValid = false;
+		if (positionInput.matches("^\\d+\\s\\d+\\s+[NESWnesw]\\s?$")) {
+			int inputX = Parser.parsePosition(positionInput).getCoordinates().getX();
+			int inputY = Parser.parsePosition(positionInput).getCoordinates().getY();
+			Heading inputHeading = Parser.parsePosition(positionInput).getHeading();
 
-		boolean inputXIsValid = inputX >= 0 && inputX < plateau.getWidth();
-		boolean inputYIsValid = inputY >= 0 && inputY < plateau.getHeight();
+			boolean inputXIsValid = inputX >= 0 && inputX < plateau.getWidth();
+			boolean inputYIsValid = inputY >= 0 && inputY < plateau.getHeight();
 
-		boolean inputHeadingIsValid = false;
-		for (Heading heading : Heading.values()) if (inputHeading == heading) inputHeadingIsValid = true;
-
-		return (inputXIsValid && inputYIsValid && inputHeadingIsValid);
+			boolean inputHeadingIsValid = false;
+			for (Heading heading : Heading.values()) if (inputHeading == heading) inputHeadingIsValid = true;
+			inputValid = inputXIsValid && inputYIsValid && inputHeadingIsValid;
+		}
+		return (inputValid);
 	}
 
 	static boolean instructionInputValid(String input) {
@@ -48,7 +51,7 @@ public class UserInput {
 		do {
 			System.out.println("Enter the rover's position eg. \"1 2 N\"");
 			positionInput = in.nextLine();
-			if(!positionInputValid(plateau, positionInput)) invalidInputMessage();
+			if (!positionInputValid(plateau, positionInput)) invalidInputMessage();
 		} while (!positionInputValid(plateau, positionInput));
 		return positionInput;
 	}
