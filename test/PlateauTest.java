@@ -49,4 +49,33 @@ public class PlateauTest {
 		assertEquals(null, p.getRoverAt("0 0 E"));
 
 	}
+
+	@Test
+	public void testSetBeaconAt() {
+		Plateau p = new Plateau(new int[] {5, 5});
+
+		assertTrue(p.beacons.isEmpty());
+		p.setBeaconAt(new Coordinates(3, 3));
+
+		assertEquals(new Coordinates(3,3).toString(), p.beacons.get(0));
+
+	}
+
+	@Test
+	public void beaconExistsAt() {
+		Plateau p = new Plateau(new int[] {5, 5});
+
+		assertTrue(p.beacons.isEmpty());
+		p.setBeaconAt(new Coordinates(0, 0));
+		p.setBeaconAt(new Coordinates(1, 3));
+		p.setBeaconAt(new Coordinates(5, 0));
+
+		assertFalse(p.beaconExistsAt(new Coordinates(5, 5)));
+		assertTrue(p.beaconExistsAt(new Coordinates(0, 0)));
+		assertTrue(p.beaconExistsAt(new Coordinates(1, 3)));
+		assertTrue(p.beaconExistsAt(new Coordinates(5, 0)));
+
+
+	}
+
 }

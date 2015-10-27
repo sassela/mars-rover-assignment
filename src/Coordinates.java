@@ -23,10 +23,6 @@ public class Coordinates {
 		return x + " " + y;
 	}
 
-	public boolean equals(Coordinates coordinates) {
-		return this.toString().equals(coordinates.toString());
-	}
-
 	public void incrementX() {
 		this.x++;
 	}

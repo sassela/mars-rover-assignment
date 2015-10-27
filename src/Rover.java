@@ -36,7 +36,7 @@ public class Rover {
 			for (char instruction : instructions) {
 				switch (Character.toUpperCase(instruction)) {
 					case 'M':
-						this.move();
+						this.moveIfNoBeacon();
 						break;
 					case 'L':case 'R':
 						this.turn(instruction);
@@ -53,27 +53,21 @@ public class Rover {
 	 * Moves the rover forward one grid point depending on its current heading
 	 */
 	public void move() {
-		if (isWithinPlateauLimits()) {
-//			if (plateau.isOnEdge(this.currentCoordinates) && !(plateau.beaconExistsAt(this.currentCoordinates))) {
-//				plateau.setBeaconAt(this.currentCoordinates);
-//			}
-			switch (currentHeading) {
-				case N:
-					this.currentCoordinates.incrementY();
-					break;
-				case E:
-					this.currentCoordinates.incrementX();
-					break;
-				case S:
-					this.currentCoordinates.decrementY();
-					break;
-				case W:
-					this.currentCoordinates.decrementX();
-					break;
-			}
-			updatePosition();
+		switch (currentHeading) {
+			case N:
+				this.currentCoordinates.incrementY();
+				break;
+			case E:
+				this.currentCoordinates.incrementX();
+				break;
+			case S:
+				this.currentCoordinates.decrementY();
+				break;
+			case W:
+				this.currentCoordinates.decrementX();
+				break;
 		}
-	}
+		updatePosition();	}
 
 	/**
 	 * Rotates the rover left or right
@@ -131,6 +125,15 @@ public class Rover {
 		return withinLimits;
 	}
 
+	void fallOffEdge(){
+		plateau.setBeaconAt(this.currentCoordinates);
+		plateau.removeRover(this);
+		this.currentPosition = null;
+	}
 
+	void moveIfNoBeacon() {
+		if(isWithinPlateauLimits()) move();
+		else if (!plateau.beaconExistsAt(this.currentCoordinates)) fallOffEdge();
+	}
 
 }

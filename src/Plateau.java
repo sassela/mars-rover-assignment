@@ -68,4 +68,8 @@ public class Plateau {
 		rovers.add(rover);
 	}
 
+	public void removeRover(Rover rover) {
+		rovers.remove(rover);
+	}
+
 }

@@ -1,11 +1,11 @@
 import org.junit.Test;
-import static org.junit.Assert.assertEquals;
-import static org.junit.Assert.assertTrue;
-import static org.junit.Assert.assertFalse;
+
+import static org.junit.Assert.*;
 
 public class RoverTest {
 	Plateau p = new Plateau(new int[] {5, 5});
 	Position bottomLeft = new Position(new Coordinates(0, 0), Heading.N);
+	Position topRight = new Position(new Coordinates(5, 5), Heading.N);
 
 	@Test
 	public void testInstruct(){
@@ -62,13 +62,29 @@ public class RoverTest {
 	}
 
 	@Test
-	public void testLeaveBeacon() {
+	public void testFallOffEdge(){
+		Rover r = new Rover(p, topRight);
+
+		assertFalse(p.beaconExistsAt(topRight.getCoordinates()));
+		r.fallOffEdge();
+		// Rover should fall off the plateau
+		assertNull(r.currentPosition);
+		assertFalse(p.rovers.contains(r));
+		assertTrue(p.beaconExistsAt(topRight.getCoordinates()));
+	}
+
+	@Test
+	public void testMoveIfNoBeacon() {
 		Rover r = new Rover(p, bottomLeft);
 
-		assertEquals(false, p.beaconExistsAt(bottomLeft.getCoordinates()));
 		r.turn('L');
-		r.move();
-		assertEquals(true, p.beaconExistsAt(bottomLeft.getCoordinates()));
+		r.moveIfNoBeacon();
+
+		Rover s = new Rover(p, bottomLeft);
+		s.turn('L');
+		s.moveIfNoBeacon();
+		// Rover should detect the placed beacon and not move
+		assertEquals(bottomLeft.toString(), s.getCurrentPosition());
 
 	}
 }
