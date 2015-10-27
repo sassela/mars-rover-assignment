@@ -21,6 +21,11 @@ public class Rover {
 		this.currentPosition = currentPosition;
 	}
 
+	public void updatePosition() {
+		this.currentPosition = new Position(currentCoordinates, currentHeading);
+	}
+
+
 	/**
 	 * Breaks down a series of instructions and determines what action the rover should take for each instruction
 	 * @param instructionsInput series of instructions
@@ -38,6 +43,7 @@ public class Rover {
 						break;
 				}
 			}
+			updatePosition();
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
@@ -85,7 +91,6 @@ public class Rover {
 		}
 		// converts the angle unit integer value into the corresponding heading
 		this.currentHeading = Heading.values()[Heading.normalise(angleUnit)];
-		updatePosition();
 	}
 
 	public Coordinates getCurrentCoordinates() {
@@ -100,15 +105,11 @@ public class Rover {
 		return currentPosition.toString();
 	}
 
-	public void updatePosition() {
-		this.currentPosition = new Position(currentCoordinates, currentHeading);
-	}
-
 	/**
 	 * Checks that the carrying out of an instruction does not take the rover outside of the plateau limits
 	 * @return variable that indicates whether the above would occur
 	 */
-	private boolean isWithinPlateauLimits() {
+	boolean isWithinPlateauLimits() {
 		boolean withinLimits = false;
 		int x = currentCoordinates.getX();
 		int y = currentCoordinates.getY();

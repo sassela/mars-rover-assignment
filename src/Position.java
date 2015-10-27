@@ -18,21 +18,9 @@ public class Position {
 		this.heading = heading;
 	}
 
-	Position() {
-		this.coordinates = new Coordinates(0, 0);
-		this.heading = Heading.N;
-	}
-
 	@Override
 	public String toString() {
 		return coordinates.toString() + " " + heading.toString();
-	}
-
-	Position parsePosition(String s) {
-		String[] positionArray = s.split(" ");
-		Coordinates coord = coordinates.parseCoordinates(positionArray[0], positionArray[1]);
-		Heading head = Heading.valueOf(positionArray[2]);
-		return new Position(coord, head);
 	}
 
 	public Coordinates getCoordinates() {

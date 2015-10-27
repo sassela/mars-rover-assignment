@@ -29,6 +29,22 @@ public class Plateau {
 		this.size = size;
 	}
 
+	public Rover getRoverAt(String position) {
+		Rover roverAtPosition = null;
+		for (Rover rover : rovers) {
+			if (rover.getCurrentPosition().equals(position)) {
+				roverAtPosition = rover;
+			}
+		}
+		return roverAtPosition;
+	}
+
+	Rover deployRoverAt(String position) {
+		Rover rover = new Rover(this, Parser.parsePosition(position));
+		this.addRover(rover);
+		return rover;
+	}
+
 	public int getWidth() {
 		return size[0];
 	}
@@ -41,25 +57,4 @@ public class Plateau {
 		rovers.add(rover);
 	}
 
-	public Rover getRoverAt(String position) {
-		Rover roverAtPosition = null;
-		for (Rover rover : rovers) {
-			if (rover.getCurrentPosition().equals(position)) {
-				roverAtPosition = rover;
-			}
-		}
-		return roverAtPosition;
-	}
-
-	boolean isOnEdge(Coordinates coordinates) {
-
-	}
-
-	void setBeaconAt(Coordinates coordinates) {
-		beacons.add(coordinates);
-	}
-
-	public boolean beaconExistsAt(Coordinates coordinates) {
-		return (beacons.contains(coordinates));
-	}
 }

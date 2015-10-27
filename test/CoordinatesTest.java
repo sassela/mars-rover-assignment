@@ -2,12 +2,10 @@ import org.junit.Test;
 import static org.junit.Assert.assertEquals;
 
 public class CoordinatesTest {
-	Coordinates c = new Coordinates(0, 0);
-
 	@Test
-	public void testParseCoordinates() {
-		c = c.parseCoordinates("1", "5");
-		assertEquals(1, c.getX());
-		assertEquals(5, c.getY());
+	public void testToString() {
+		assertEquals("0 0", new Coordinates(0, 0).toString());
+		assertEquals("5 5", new Coordinates(5, 5).toString());
+		assertEquals("934 762", new Coordinates(934, 762).toString());
 	}
 }
