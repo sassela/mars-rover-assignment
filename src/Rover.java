@@ -54,9 +54,9 @@ public class Rover {
 	 */
 	public void move() {
 		if (isWithinPlateauLimits()) {
-			if (plateau.isOnEdge(this.currentCoordinates) && !(plateau.beaconExistsAt(this.currentCoordinates))) {
-				plateau.setBeaconAt(this.currentCoordinates);
-			}
+//			if (plateau.isOnEdge(this.currentCoordinates) && !(plateau.beaconExistsAt(this.currentCoordinates))) {
+//				plateau.setBeaconAt(this.currentCoordinates);
+//			}
 			switch (currentHeading) {
 				case N:
 					this.currentCoordinates.incrementY();
@@ -130,5 +130,7 @@ public class Rover {
 		}
 		return withinLimits;
 	}
+
+
 
 }

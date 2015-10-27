@@ -14,11 +14,12 @@ public class Plateau {
 
 	int[] size;
 	ArrayList<Rover> rovers;
-	ArrayList<Coordinates> beacons;
+	ArrayList<String> beacons;
 
 	public Plateau(int[] size) {
 		this.size = size;
 		rovers = new ArrayList<>();
+		beacons = new ArrayList<>();
 	}
 
 	public void setSize(int[] size) {
@@ -43,6 +44,16 @@ public class Plateau {
 		Rover rover = new Rover(this, Parser.parsePosition(position));
 		this.addRover(rover);
 		return rover;
+	}
+
+	void setBeaconAt(Coordinates c) {
+		String coordinates = c.toString();
+		beacons.add(coordinates);
+	}
+
+	boolean beaconExistsAt(Coordinates c) {
+		String coordinates = c.toString();
+		return beacons.contains(coordinates);
 	}
 
 	public int getWidth() {
