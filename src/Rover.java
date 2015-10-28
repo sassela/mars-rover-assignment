@@ -129,6 +129,7 @@ public class Rover {
 		plateau.setBeaconAt(this.currentCoordinates);
 		plateau.removeRover(this);
 		this.currentPosition = null;
+		System.out.println("Boom.");
 	}
 
 	void moveIfNoBeacon() {
